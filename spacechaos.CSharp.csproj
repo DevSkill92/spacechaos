@@ -111,6 +111,7 @@
     <Compile Include="Assets\Intern\Scripts\Screen\Title.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Track.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\TrackCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Intern\Shader\simple_color.shader" />

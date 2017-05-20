@@ -12,6 +12,8 @@ public class RequireAliveTrigger : MonoBehaviour
 	private float fall_range = 2;
 	[SerializeField]
 	private Component[] disable_collection;
+	[SerializeField]
+	private float force_alive_factor = 1;
 
 	[SerializeField]
 	private UnityEvent OnDie = new UnityEvent();
@@ -46,10 +48,19 @@ public class RequireAliveTrigger : MonoBehaviour
 		if (
 			alive
 			&& collider.gameObject.layer == LayerMask.NameToLayer( "trigger_alive" )
+			&& last_alive < Time.time
 		)
 		{
 			last_alive = Time.time;
 		}
+	}
+
+	/// <summary>
+	/// Force the alive state for given time
+	/// </summary>
+	public void ForceAlive()
+	{
+		last_alive = Time.time + force_alive_factor;
 	}
 
 	/// <summary>

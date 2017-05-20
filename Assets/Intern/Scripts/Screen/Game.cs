@@ -23,7 +23,9 @@ public class Game : Screen {
 	[SerializeField]
 	private Countdown countdown;
 	[SerializeField]
-	private Transform track_container;
+	private TrackCreator track_creator;
+	[SerializeField]
+	private Collider[] initial_leader_trigger;
 
 	private Player leader;
 	private float last_switch;
@@ -66,11 +68,11 @@ public class Game : Screen {
 	/// <summary>
 	/// Gets the track container
 	/// </summary>
-	public Transform TrackContainer
+	public TrackCreator TrackCreator
 	{
 		get
 		{
-			return track_container;
+			return track_creator;
 		}
 	}
 
@@ -81,6 +83,11 @@ public class Game : Screen {
 	{
 		base.Enter();
 		planet_list = FindObjectsOfType<Planet>();
+
+		foreach ( Collider trigger in initial_leader_trigger )
+		{
+			trigger.gameObject.SetActive( true );
+		}
 	}
 
 	/// <summary>
@@ -109,6 +116,12 @@ public class Game : Screen {
 		if ( last_switch > Time.time - switch_cooldown )
 		{
 			return false;
+		}
+		last_switch = Time.time;
+
+		foreach ( Collider trigger in initial_leader_trigger )
+		{
+			trigger.gameObject.SetActive( false );
 		}
 
 		if ( null != leader )
