@@ -26,6 +26,17 @@ public class Player : MonoBehaviour
 	private int index;
 
 	/// <summary>
+	/// Gets the index of the player
+	/// </summary>
+	public int Index
+	{
+		get
+		{
+			return index;
+		}
+	}
+
+	/// <summary>
 	/// Bind user index
 	/// </summary>
 	/// <param name="joy"></param>

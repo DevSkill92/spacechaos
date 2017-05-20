@@ -18,6 +18,8 @@ public class Game : Screen {
 
 	private Player leader;
 	private float last_switch;
+	private Player[] player_list;
+	private Planet[] planet_list;
 
 	/// <summary>
 	/// Get the current leader
@@ -31,6 +33,25 @@ public class Game : Screen {
 	}
 
 	/// <summary>
+	/// Gets all planets in scene
+	/// </summary>
+	public Planet[] Planet_List
+	{
+		get
+		{
+			return planet_list;
+		}
+	}
+
+	/// <summary>
+	/// Find planets
+	/// </summary>
+	private void Start()
+	{
+		planet_list = FindObjectsOfType<Planet>();
+	}
+
+	/// <summary>
 	/// Binds the amount of player and spawn players
 	/// </summary>
 	/// <param name="amount"></param>
@@ -39,9 +60,10 @@ public class Game : Screen {
 	{
 		int start = allow_keyboard ? 0 : 1;
 
+		player_list = new Player[ amount ];
 		for ( int i = 0 ; i < amount ; i++ )
 		{
-			spawn_player( start + i , i );
+			player_list[ i ] = spawn_player( start + i , i );
 		}
 	}
 
@@ -74,11 +96,13 @@ public class Game : Screen {
 	/// </summary>
 	/// <param name="joynum"></param>
 	/// <param name="index"></param>
-	private void spawn_player( int joy, int index )
+	private Player spawn_player( int joy, int index )
 	{
-		GameObject player = Instantiate( player_prefab );
+		GameObject container = Instantiate( player_prefab );
+		Player player = container.GetComponent<Player>();
 		player.GetComponent<Player>().BindIndex( joy , index );
 		player.transform.position = start_point[ index ].transform.position;
+		return player;
 	}
 
 	/// <summary>
@@ -87,7 +111,6 @@ public class Game : Screen {
 	/// <param name="plant"></param>
 	public void Capture( Planet plant )
 	{
-
 	}
 
 }
