@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 	private RequireAliveTrigger alive;
 	[SerializeField]
 	private AliveTriggerCreator alive_creator;
+	[SerializeField]
+	private Track track;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -105,6 +107,7 @@ public class Player : MonoBehaviour
 	{
 		on_lead.Invoke();
 		body.material = skin_leader[ index ];
+		track.enabled = true;
 		alive_creator.enabled = true;
 	}
 
@@ -115,6 +118,7 @@ public class Player : MonoBehaviour
 	{
 		body.material = skin[ index ];
 		on_follow.Invoke();
+		track.enabled = false;
 		alive_creator.enabled = false;
 	}
 

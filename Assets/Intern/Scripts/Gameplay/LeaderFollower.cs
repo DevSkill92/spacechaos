@@ -5,6 +5,16 @@
 /// </summary>
 class LeaderFollower : MonoBehaviour
 {
+	private float height;
+
+	/// <summary>
+	/// Keep initial height
+	/// </summary>
+	private void Start()
+	{
+		height = transform.position.y;
+	}
+
 	/// <summary>
 	/// Updates the position
 	/// </summary>
@@ -13,7 +23,9 @@ class LeaderFollower : MonoBehaviour
 		Player leader = Root.I.Get<ScreenManager>().Get<Game>().Leader;
 		if ( null != leader )
 		{
-			transform.position = leader.transform.position;
+			Vector3 position = leader.transform.position;
+			position.y = height;
+			transform.position = position;
 		}
 	}
 }

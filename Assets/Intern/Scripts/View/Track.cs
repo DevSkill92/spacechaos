@@ -53,6 +53,7 @@ public class Track : MonoBehaviour
 		// appendd vertices
 		vertices.Add( left_anchor.transform.position );
 		vertices.Add( right_anchor.transform.position );
+		Debug.Log( left_anchor.transform.position );
 		int count = vertices.Count;
 
 		// append uvs
