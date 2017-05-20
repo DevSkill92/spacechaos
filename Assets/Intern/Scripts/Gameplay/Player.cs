@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 	private AliveTriggerCreator alive_creator;
 	[SerializeField]
 	private Track track;
+	[SerializeField]
+	private GameObject leader_trigger = null;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -109,6 +111,7 @@ public class Player : MonoBehaviour
 		body.material = skin_leader[ index ];
 		track.enabled = true;
 		alive_creator.enabled = true;
+		leader_trigger.gameObject.SetActive( true );
 	}
 
 	/// <summary>
@@ -120,6 +123,7 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.enabled = false;
 		alive_creator.enabled = false;
+		leader_trigger.gameObject.SetActive( false );
 	}
 
 	/// <summary>
@@ -133,9 +137,13 @@ public class Player : MonoBehaviour
 			return;
 		}
 
-		if ( collider.gameObject.layer == LayerMask.NameToLayer( "trigger_leader" ) )
+		Game game = Root.I.Get<ScreenManager>().Get<Game>();
+		if (
+			collider.gameObject.layer == LayerMask.NameToLayer( "trigger_leader" ) 
+			&& collider.gameObject != leader_trigger
+		)
 		{
-			( Root.I.Get<ScreenManager>().Active as Game ).RequestLeaderSwitch( this );
+			game.RequestLeaderSwitch( this );
 			return;
 		}
 
