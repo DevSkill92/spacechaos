@@ -34,7 +34,7 @@ public class Track : MonoBehaviour
 	{
 		if ( null == container )
 		{
-			container = GameObject.Find( "track" ).transform;
+			container = Root.I.Get<ScreenManager>().Get<Game>().TrackContainer;
 		}
 
 		foreach ( Transform child in container )

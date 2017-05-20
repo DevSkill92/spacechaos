@@ -22,6 +22,8 @@ public class Game : Screen {
 	private ScorePanel score_panel;
 	[SerializeField]
 	private Countdown countdown;
+	[SerializeField]
+	private Transform track_container;
 
 	private Player leader;
 	private float last_switch;
@@ -62,10 +64,22 @@ public class Game : Screen {
 	}
 
 	/// <summary>
+	/// Gets the track container
+	/// </summary>
+	public Transform TrackContainer
+	{
+		get
+		{
+			return track_container;
+		}
+	}
+
+	/// <summary>
 	/// Find planets
 	/// </summary>
 	public override void Enter()
 	{
+		base.Enter();
 		planet_list = FindObjectsOfType<Planet>();
 	}
 

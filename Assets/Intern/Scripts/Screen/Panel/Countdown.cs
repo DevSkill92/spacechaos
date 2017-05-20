@@ -32,6 +32,7 @@ public class Countdown : MonoBehaviour
 		}
 
 		start = Time.time;
+		instantiate_tick( 0 );
 
 		gameObject.SetActive( true );
 	}
@@ -64,6 +65,15 @@ public class Countdown : MonoBehaviour
 		}
 
 		// Show tick
+		instantiate_tick( tick );
+	}
+
+	/// <summary>
+	/// Instantiate tick prefab
+	/// </summary>
+	/// <param name="tick"></param>
+	private void instantiate_tick( int tick )
+	{
 		Instantiate( tick_prefab[ tick ] ).transform.SetParent( transform , true );
 	}
 }
