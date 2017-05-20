@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void Leader()
 	{
-		lead.Invoke();
+		on_lead.Invoke();
 		body.material = skin_leader[ index ];
 	}
 
