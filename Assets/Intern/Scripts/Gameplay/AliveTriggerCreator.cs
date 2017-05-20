@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Spawns alive trigger instances
+/// </summary>
 public class AliveTriggerCreator : MonoBehaviour
 {
 	[SerializeField]
@@ -15,16 +18,20 @@ public class AliveTriggerCreator : MonoBehaviour
 
 	private float last_add;
 
+	/// <summary>
+	/// Call create in giver interval
+	/// </summary>
 	private void Update()
 	{
 		if ( Time.time - interval > last_add )
 		{
 			create();
 		}
-
-
 	}
 
+	/// <summary>
+	///  Spawns trigger instance
+	/// </summary>
 	private void create()
 	{
 		GameObject new_object = Instantiate( prefab );

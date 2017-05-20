@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 	private CaptureLine capture_line;
 	[SerializeField]
 	private RequireAliveTrigger alive;
+	[SerializeField]
+	private AliveTriggerCreator alive_creator;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -74,6 +76,7 @@ public class Player : MonoBehaviour
 	{
 		Follower();
 		control.BindJoyindex( joy );
+		alive_creator.enabled = false;
 	}
 
 	/// <summary>
@@ -102,6 +105,7 @@ public class Player : MonoBehaviour
 	{
 		on_lead.Invoke();
 		body.material = skin_leader[ index ];
+		alive_creator.enabled = true;
 	}
 
 	/// <summary>
@@ -111,6 +115,7 @@ public class Player : MonoBehaviour
 	{
 		body.material = skin[ index ];
 		on_follow.Invoke();
+		alive_creator.enabled = false;
 	}
 
 	/// <summary>

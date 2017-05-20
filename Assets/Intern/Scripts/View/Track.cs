@@ -14,8 +14,6 @@ public class Track : MonoBehaviour
 	[SerializeField]
 	private GameObject right_anchor;
 	[SerializeField]
-	private GameObject center;
-	[SerializeField]
 	private Material material;
 	[SerializeField]
 	private int length = 100;
@@ -26,6 +24,7 @@ public class Track : MonoBehaviour
 	private Vector3[] normal = new Vector3[ 0 ];
 
 	private float last_update;
+	private Transform container = null;
 	private int y_uv;
 
 	/// <summary>
@@ -33,7 +32,12 @@ public class Track : MonoBehaviour
 	/// </summary>
 	private void update_track()
 	{
-		foreach ( Transform child in transform )
+		if ( null == container )
+		{
+			container = GameObject.Find( "track" ).transform;
+		}
+
+		foreach ( Transform child in container )
 		{
 			DestroyImmediate( child.gameObject );
 		}
@@ -90,7 +94,7 @@ public class Track : MonoBehaviour
 
 		filter.mesh = mesh;
 
-		obj.transform.SetParent( transform , true );
+		obj.transform.SetParent( container , true );
 		obj.transform.localScale = Vector3.one;
 		obj.transform.rotation = Quaternion.Euler( new Vector3( 0 , 0 , 0 ) );
 

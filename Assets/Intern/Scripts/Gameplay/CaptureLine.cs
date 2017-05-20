@@ -51,7 +51,7 @@ public class CaptureLine : MonoBehaviour
 			));
 
 			transform.position = ( target_pos - position ) * 0.5f;
-			transform.localScale = new Vector3( distance , distance , distance );
+			transform.localScale = new Vector3( 1 , distance , 1 );
 
 			material.mainTextureScale = new Vector2( 1 , distance );
 			material.SetFloat( "_Time" , Time.time );
