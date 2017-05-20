@@ -35,7 +35,10 @@ public class RequireAliveTrigger : MonoBehaviour
 	/// <param name="collider"></param>
 	public void OnTriggerStay( Collider collider )
 	{
-		if ( alive )
+		if (
+			alive
+			&& collider.gameObject.layer == LayerMask.NameToLayer( "trigger_alive" )
+		)
 		{
 			last_alive = Time.time;
 		}

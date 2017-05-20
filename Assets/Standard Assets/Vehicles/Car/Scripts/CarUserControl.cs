@@ -8,10 +8,16 @@ namespace UnityStandardAssets.Vehicles.Car
     public class CarUserControl : MonoBehaviour
     {
         private CarController m_Car; // the car controller we want to use
+		private int joy;
 
-		[SerializeField]
-		private int joy_num;
-
+		/// <summary>
+		/// Binds the used input index
+		/// </summary>
+		/// <param name="joy"></param>
+		public void BindJoyindex( int joy )
+		{
+			this.joy = joy;
+		}
 
         private void Awake()
         {
@@ -23,8 +29,8 @@ namespace UnityStandardAssets.Vehicles.Car
         private void FixedUpdate()
         {
             // pass the input to the car!
-            float h = CrossPlatformInputManager.GetAxis("Horizontal" + joy_num );
-            float v = CrossPlatformInputManager.GetAxis("Vertical"+ joy_num );
+            float h = CrossPlatformInputManager.GetAxis("Horizontal" + joy );
+            float v = CrossPlatformInputManager.GetAxis("Vertical"+ joy );
 			
 #if !MOBILE_INPUT
             float handbrake = CrossPlatformInputManager.GetAxis("Jump");

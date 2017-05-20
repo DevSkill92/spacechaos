@@ -17,6 +17,8 @@ public class Track : MonoBehaviour
 	private GameObject center;
 	[SerializeField]
 	private Material material;
+	[SerializeField]
+	private int length = 100;
 
 	private List<Vector3> vertices = new List<Vector3>();
 	private List<int> indieces = new List<int>();
@@ -38,7 +40,7 @@ public class Track : MonoBehaviour
 
 		List<Vector3> vertices = this.vertices;
 
-		if ( 100 < vertices.Count )
+		if ( length < vertices.Count )
 		{
 			vertices.RemoveRange( 0 , 2 );
 			uv.RemoveRange( 0 , 2 );
@@ -59,7 +61,7 @@ public class Track : MonoBehaviour
 			return;
 		}
 
-		if ( 100 >= vertices.Count )
+		if ( length >= vertices.Count )
 		{
 			// appand indieces
 			indieces.Add( count - 2 );

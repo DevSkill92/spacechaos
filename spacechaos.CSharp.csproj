@@ -86,10 +86,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Intern\Scripts\AliveTriggerCreator.cs" />
-    <Compile Include="Assets\Intern\Scripts\DestroyTimeout.cs" />
-    <Compile Include="Assets\Intern\Scripts\RequireAliveTrigger.cs" />
-    <Compile Include="Assets\Intern\Scripts\Track.cs" />
+    <Compile Include="Assets\Intern\Scripts\Core\Root.cs" />
+    <Compile Include="Assets\Intern\Scripts\Core\RootComponent.cs" />
+    <Compile Include="Assets\Intern\Scripts\Core\Screen.cs" />
+    <Compile Include="Assets\Intern\Scripts\Core\ScreenManager.cs" />
+    <Compile Include="Assets\Intern\Scripts\Gameplay\AliveTriggerCreator.cs" />
+    <Compile Include="Assets\Intern\Scripts\Gameplay\Player.cs" />
+    <Compile Include="Assets\Intern\Scripts\Gameplay\RequireAliveTrigger.cs" />
+    <Compile Include="Assets\Intern\Scripts\Helper\DestroyTimeout.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Button\PlayerAmountButton.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Button\SwitchScreenButton.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Credits.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Game.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\PlayerAmount.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Result.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Title.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Intern\Shader\simple_color.shader" />
