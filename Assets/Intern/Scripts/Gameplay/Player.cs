@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private CarUserControl control;
 	[SerializeField]
+	private CaptureLine capture_line;
+	[SerializeField]
 	private UnityEvent follow = new UnityEvent();
 	[SerializeField]
 	private UnityEvent lead = new UnityEvent();
@@ -71,6 +73,14 @@ public class Player : MonoBehaviour
 		if ( collider.gameObject.layer == LayerMask.NameToLayer( "trigger_leader" ) )
 		{
 			( Root.I.Get<ScreenManager>().Active as Game ).RequestLeaderSwitch( this );
+			return;
+		}
+
+		Planet planet = collider.GetComponent<Planet>();
+		if ( null != planet )
+		{
+			planet.Capture( this );
+			capture_line.Show( planet );
 		}
 	}
 }

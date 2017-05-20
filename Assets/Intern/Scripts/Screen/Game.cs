@@ -81,4 +81,13 @@ public class Game : Screen {
 		player.transform.position = start_point[ index ].transform.position;
 	}
 
+	/// <summary>
+	/// Called on capture a plant
+	/// </summary>
+	/// <param name="plant"></param>
+	public void Capture( Planet plant )
+	{
+
+	}
+
 }

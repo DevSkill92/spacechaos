@@ -64,6 +64,24 @@ public class ScreenManager : RootComponent {
 	}
 
 	/// <summary>
+	/// Get screen of givent type
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	public T Get<T>() where T : Screen
+	{
+		foreach ( Screen screen in screen_list )
+		{
+			if ( screen is T )
+			{
+				return screen as T;
+			}
+		}
+
+		return null;
+	}
+
+	/// <summary>
 	/// Switch to screen of givent type
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
