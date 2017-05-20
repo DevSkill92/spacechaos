@@ -32,6 +32,11 @@ public class Planet : MonoBehaviour
 		{
 			return owner;
 		}
+		set
+		{
+			owner = value;
+			last_capture = Time.time;
+		}
 	}
 
 	// Decrease player progress

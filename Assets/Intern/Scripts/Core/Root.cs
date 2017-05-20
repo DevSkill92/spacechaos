@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Root
 {
@@ -23,7 +24,15 @@ public class Root
 
 	private Root()
 	{
+	}
 
+	/// <summary>
+	/// Reload the entire game
+	/// </summary>
+	public void Reload()
+	{
+		instance = null;
+		SceneManager.LoadScene( SceneManager.GetActiveScene().name );
 	}
 
 	public T Get<T>() where T : RootComponent

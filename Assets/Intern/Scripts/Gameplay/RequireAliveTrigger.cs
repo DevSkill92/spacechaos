@@ -24,6 +24,14 @@ public class RequireAliveTrigger : MonoBehaviour
 	private Vector3 fall_direction;
 	private Vector3 fall_rotation;
 
+	public bool Alive
+	{
+		get
+		{
+			return alive;
+		}
+	}
+
 	private void Start()
 	{
 		last_alive = Time.time + 2;

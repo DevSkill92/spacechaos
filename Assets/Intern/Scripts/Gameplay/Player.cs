@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityStandardAssets.Vehicles.Car;
 
@@ -13,17 +14,36 @@ public class Player : MonoBehaviour
 	private Material[] skin;
 	[SerializeField]
 	private Material[] skin_leader;
+
 	[SerializeField]
 	private CarUserControl control;
 	[SerializeField]
 	private CaptureLine capture_line;
 	[SerializeField]
-	private UnityEvent follow = new UnityEvent();
+	private RequireAliveTrigger alive;
+
 	[SerializeField]
-	private UnityEvent lead = new UnityEvent();
+	private UnityEvent on_follow = new UnityEvent();
+	[SerializeField]
+	private UnityEvent on_lead = new UnityEvent();
+	[SerializeField]
+	private UnityEvent on_enable = new UnityEvent();
+	[SerializeField]
+	private UnityEvent on_disable = new UnityEvent();
 
 	private int joy;
 	private int index;
+
+	/// <summary>
+	/// Gets that the player is alive
+	/// </summary>
+	public bool Alive
+	{
+		get
+		{
+			return alive.Alive;
+		}
+	}
 
 	/// <summary>
 	/// Gets the index of the player
@@ -56,6 +76,24 @@ public class Player : MonoBehaviour
 		control.BindJoyindex( joy );
 	}
 
+	/// <summary>
+	/// Disable the player ( user input )
+	/// </summary>
+	public void Disable()
+	{
+		control.enabled = false;
+		on_disable.Invoke();
+	}
+
+	/// <summary>
+	/// Enable the player ( user input )
+	/// </summary>
+	public void Enable()
+	{
+		control.enabled = true;
+		on_enable.Invoke();
+	}
+
 
 	/// <summary>
 	/// Switch to loader states
@@ -72,7 +110,7 @@ public class Player : MonoBehaviour
 	public void Follower()
 	{
 		body.material = skin[ index ];
-		follow.Invoke();
+		on_follow.Invoke();
 	}
 
 	/// <summary>
@@ -81,6 +119,11 @@ public class Player : MonoBehaviour
 	/// <param name="collider"></param>
 	private void OnTriggerStay( Collider collider )
 	{
+		if ( !Alive )
+		{
+			return;
+		}
+
 		if ( collider.gameObject.layer == LayerMask.NameToLayer( "trigger_leader" ) )
 		{
 			( Root.I.Get<ScreenManager>().Active as Game ).RequestLeaderSwitch( this );

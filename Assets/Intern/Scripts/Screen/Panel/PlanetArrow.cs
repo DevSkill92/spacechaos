@@ -43,7 +43,7 @@ public class PlanetArrow : MonoBehaviour
 
 		Planet nearest = null;
 		float nearst_dst = float.MaxValue;
-		foreach( Planet planet in game.Planet_List )
+		foreach( Planet planet in game.PlanetList )
 		{
 			float dst = Vector3.Distance( leader.transform.position , planet.transform.position );
 			if ( dst < nearst_dst )

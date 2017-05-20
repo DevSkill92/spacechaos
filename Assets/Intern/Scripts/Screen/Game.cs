@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 /// <summary>
 /// Handles the game screen
@@ -14,7 +15,13 @@ public class Game : Screen {
 	[SerializeField]
 	private float switch_cooldown = 2;
 	[SerializeField]
+	private int victory_score = 3;
+	[SerializeField]
 	private UnityEvent switch_leader = new UnityEvent();
+	[SerializeField]
+	private ScorePanel score_panel;
+	[SerializeField]
+	private Countdown countdown;
 
 	private Player leader;
 	private float last_switch;
@@ -33,9 +40,20 @@ public class Game : Screen {
 	}
 
 	/// <summary>
+	/// Gets all players
+	/// </summary>
+	public Player[] PlayerList
+	{
+		get
+		{
+			return player_list;
+		}
+	}
+
+	/// <summary>
 	/// Gets all planets in scene
 	/// </summary>
-	public Planet[] Planet_List
+	public Planet[] PlanetList
 	{
 		get
 		{
@@ -46,7 +64,7 @@ public class Game : Screen {
 	/// <summary>
 	/// Find planets
 	/// </summary>
-	private void Start()
+	public override void Enter()
 	{
 		planet_list = FindObjectsOfType<Planet>();
 	}
@@ -65,6 +83,7 @@ public class Game : Screen {
 		{
 			player_list[ i ] = spawn_player( start + i , i );
 		}
+		countdown.Show();
 	}
 
 	/// <summary>
@@ -111,6 +130,45 @@ public class Game : Screen {
 	/// <param name="plant"></param>
 	public void Capture( Planet plant )
 	{
+		Dictionary<Player , int> score = calculate_score();
+		if ( victory_score <= score.Values.Max() )
+		{
+			Root.I.Get<ScreenManager>().Switch<Result>().BindScore( score  );
+			return;
+		}
+
+		if ( null != score_panel )
+		{
+			score_panel.Show( score );
+		}
+
+	}
+
+	/// <summary>
+	/// Calculates the current score by player
+	/// </summary>
+	/// <returns></returns>
+	private Dictionary<Player,int> calculate_score()
+	{
+		Dictionary<Player , int> result = new Dictionary<Player , int>();
+		foreach( Player player in player_list )
+		{
+			result.Add( player , 0 );
+		}
+
+		foreach( Planet planet in planet_list )
+		{
+			if ( null != planet.Owner ) {
+				if ( planet.Owner.Alive )
+				{
+					result[ planet.Owner ]++;
+				} else {
+					planet.Owner = null;
+				}
+			}
+		}
+
+		return result;
 	}
 
 }
