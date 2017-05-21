@@ -104,7 +104,7 @@ public class TrackCreator : MonoBehaviour
 	/// </summary>
 	/// <param name="left_anchor"></param>
 	/// <param name="right_anchor"></param>
-	public void UpdateTrack( Transform left_anchor , Transform right_anchor )
+	public void UpdateTrack( Transform left_anchor , Transform right_anchor , Color color )
 	{
 		float time = Time.time;
 		if ( time - 0.2 > last_update )
@@ -114,6 +114,7 @@ public class TrackCreator : MonoBehaviour
 			create_track( left_anchor , right_anchor );
 		}
 
+		material.color = color;
 		material.SetFloat( "_Progress" , ( ( time - last_update ) / 0.2f ) );
 	}
 

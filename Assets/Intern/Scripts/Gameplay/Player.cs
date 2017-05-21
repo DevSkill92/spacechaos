@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 	private GameObject leader_trigger = null;
 	[SerializeField]
 	private GameObject alive_trigger = null;
+	[SerializeField]
+	private Color[] color;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
 
 	private int joy;
 	private int index;
+	private float last_planet_switch;
+	private Collider last_planet;
 
 	/// <summary>
 	/// Gets that the player is alive
@@ -61,6 +65,17 @@ public class Player : MonoBehaviour
 		get
 		{
 			return index;
+		}
+	}
+
+	/// <summary>
+	/// Gets the color of the player
+	/// </summary>
+	public Color Color
+	{
+		get
+		{
+			return color[ index ];
 		}
 	}
 
@@ -162,7 +177,17 @@ public class Player : MonoBehaviour
 			&& collider.gameObject != leader_trigger
 		)
 		{
-			game.RequestLeaderSwitch( this );
+			if (
+				null == last_planet
+				|| collider != last_planet
+				|| last_planet_switch < Time.time - 1
+			)
+			{
+				last_planet_switch = Time.time;
+				last_planet = collider;
+				game.RequestLeaderSwitch( this );
+			}
+
 			return;
 		}
 

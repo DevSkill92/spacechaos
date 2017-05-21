@@ -16,12 +16,10 @@ public class ScoreEntry : MonoBehaviour
 	private Transform score_container;
 	[SerializeField]
 	private Image player_color;
-	[SerializeField]
-	private Color[] color_list;
 
 	public void Bind( Player player , int score )
 	{
-		player_color.color = color_list[ player.Index ];
+		player_color.color = player.Color;
 
 		foreach( Transform child in score_container )
 		{

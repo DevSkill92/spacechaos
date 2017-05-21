@@ -11,7 +11,7 @@ public class CaptureLine : MonoBehaviour
 	[SerializeField]
 	private float timeout = 1;
 	[SerializeField]
-	private Transform container;
+	private Player container;
 	[SerializeField]
 	private Material material;
 
@@ -52,6 +52,7 @@ public class CaptureLine : MonoBehaviour
 
 			material.mainTextureScale = new Vector2( 1 , distance / 100 );
 			material.mainTextureOffset = new Vector2( 0 , Time.time * 2 );
+			material.SetColor( "_Color" , container.Color );
 		}
 	}
 

@@ -13,9 +13,11 @@ public class Track : MonoBehaviour
 	private Transform left_anchor;
 	[SerializeField]
 	private Transform right_anchor;
+	[SerializeField]
+	private Player player;
 
 	private void Update()
 	{
-		Root.I.Get<ScreenManager>().Get<Game>().TrackCreator.UpdateTrack( left_anchor , right_anchor );
+		Root.I.Get<ScreenManager>().Get<Game>().TrackCreator.UpdateTrack( left_anchor , right_anchor , player.Color );
 	}
 }

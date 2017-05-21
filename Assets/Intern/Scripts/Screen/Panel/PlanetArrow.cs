@@ -10,8 +10,6 @@ public class PlanetArrow : MonoBehaviour
 {
 	[SerializeField]
 	private Image color_image;
-	[SerializeField]
-	private Color[] player_color;
 
 	private Player last_leader;
 	private Game game;
@@ -40,7 +38,7 @@ public class PlanetArrow : MonoBehaviour
 		if ( last_leader != leader )
 		{
 			last_leader = leader;
-			color_image.color = player_color[ leader.Index ];
+			color_image.color = leader.Color;
 			color_image.enabled = true;
 		}
 
