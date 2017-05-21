@@ -16,9 +16,7 @@ public class Player : MonoBehaviour
 	private Material[] skin_leader;
 
 	[SerializeField]
-	private CarUserControl input;
-	[SerializeField]
-	private CarController controll;
+	private SimpleCar car;
 	[SerializeField]
 	private CaptureLine capture_line;
 	[SerializeField]
@@ -29,6 +27,8 @@ public class Player : MonoBehaviour
 	private Track track;
 	[SerializeField]
 	private GameObject leader_trigger = null;
+	[SerializeField]
+	private GameObject alive_trigger = null;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 	private void Start()
 	{
 		Follower();
-		input.BindJoyindex( joy );
+		car.BindJoyindex( joy );
 		alive_creator.enabled = false;
 	}
 
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void Disable()
 	{
-		input.enabled = false;
+		car.enabled = false;
 		on_disable.Invoke();
 	}
 
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 	/// </summary>
 	public void Enable()
 	{
-		input.enabled = true;
+		car.enabled = true;
 		on_enable.Invoke();
 	}
 
@@ -126,8 +126,8 @@ public class Player : MonoBehaviour
 		track.gameObject.SetActive( true );
 		alive_creator.enabled = true;
 		leader_trigger.gameObject.SetActive( true );
-		controll.m_Topspeed = 50;
-		controll.m_MaximumSteerAngle = 10;
+		alive_trigger.gameObject.SetActive( true );
+		car.SetPower( 24 , 15 , 50 , 0 );
 	}
 
 	/// <summary>
@@ -139,10 +139,10 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.gameObject.SetActive( false );
 		alive_creator.enabled = false;
-		controll.m_Topspeed = 150;
-		controll.m_MaximumSteerAngle = 25;
+		car.SetPower( 30 , 0 , 130 , 200 );
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
+		alive_trigger.gameObject.SetActive( false );
 	}
 
 	/// <summary>
