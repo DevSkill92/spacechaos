@@ -16,9 +16,9 @@ public class RequireAliveTrigger : MonoBehaviour
 	private float force_alive_factor = 1;
 
 	[SerializeField]
-	private UnityEvent OnDie = new UnityEvent();
+	public UnityEvent OnDie = new UnityEvent();
 	[SerializeField]
-	private UnityEvent OnDead = new UnityEvent();
+	public UnityEvent OnDead = new UnityEvent();
 
 	private bool alive = true;
 	private bool dead = false;

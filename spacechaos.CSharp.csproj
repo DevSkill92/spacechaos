@@ -86,6 +86,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Intern\Scripts\Core\ReloadRequest.cs" />
     <Compile Include="Assets\Intern\Scripts\Core\Root.cs" />
     <Compile Include="Assets\Intern\Scripts\Core\RootComponent.cs" />
     <Compile Include="Assets\Intern\Scripts\Core\Screen.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets\Intern\Scripts\Screen\PlayerAmount.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Result.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Title.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\Billboard.cs" />
     <Compile Include="Assets\Intern\Scripts\View\MergeQuad.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Track.cs" />

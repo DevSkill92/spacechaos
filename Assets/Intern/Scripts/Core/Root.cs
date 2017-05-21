@@ -31,9 +31,12 @@ public class Root
 	/// </summary>
 	public void Reload()
 	{
-		instance = null;
-		int scene = SceneManager.GetActiveScene().buildIndex;
-		SceneManager.LoadScene( scene );
+		new GameObject().AddComponent<ReloadRequest>().Bind( () =>
+		{
+			instance = null;
+			int scene = SceneManager.GetActiveScene().buildIndex;
+			SceneManager.LoadScene( scene );
+		});
 	}
 
 	public T Get<T>() where T : RootComponent

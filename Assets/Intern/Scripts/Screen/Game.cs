@@ -148,6 +148,7 @@ public class Game : Screen {
 		Player player = container.GetComponent<Player>();
 		player.GetComponent<Player>().BindIndex( joy , index );
 		player.transform.position = start_point[ index ].transform.position;
+		player.GetComponent<RequireAliveTrigger>().OnDead.AddListener( killed );
 		return player;
 	}
 
@@ -168,6 +169,27 @@ public class Game : Screen {
 		{
 			score_panel.Show( score );
 		}
+	}
+
+	/// <summary>
+	/// Called after a player dies
+	/// </summary>
+	/// <param name="player"></param>
+	private void killed()
+	{
+		if ( 1 < PlayerList.Count( a => a.Alive ) )
+		{
+			return;
+		}
+
+		Dictionary<Player , int> score = calculate_score();
+		if ( 0 >= score.Values.Max() )
+		{
+			Root.I.Reload();
+			return;
+		}
+
+		Root.I.Get<ScreenManager>().Switch<Result>().BindScore( score );
 	}
 
 	/// <summary>
