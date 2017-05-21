@@ -17,7 +17,6 @@ public class Result : Screen {
 	public override void Enter()
 	{
 		base.Enter();
-		score_panel.Show( score );
 	}
 
 	/// <summary>
@@ -27,6 +26,7 @@ public class Result : Screen {
 	public void BindScore( Dictionary<Player , int> score )
 	{
 		this.score = score;
+		score_panel.Show( score );
 	}
 
 }

@@ -15,22 +15,39 @@ class RandomInstance : MonoBehaviour
 	private int amount = 1000;
 	[SerializeField]
 	private GameObject prefab;
+	[SerializeField]
+	private bool merge_to_single = false;
 
 	/// <summary>
 	/// Create instances
 	/// </summary>
 	private void Awake()
 	{
+		Vector3[] position_list = new Vector3[ amount ];
+
 		for ( int i = 0 ; i < amount ; i++ )
 		{
-			Transform instance = Instantiate( prefab ).transform;
-			instance.SetParent( transform );
-			instance.localScale = Vector3.one;
-			instance.transform.position = new Vector3(
+			Vector3 position = new Vector3(
 				Random.Range( range.x , range.y ) ,
-				0 != height ? height : Random.Range( range.x , 0 ) * random_height_factor,
+				0 != height ? height : Random.Range( range.x , 0 ) * random_height_factor ,
 				Random.Range( range.x , range.y )
 			);
+
+			if ( merge_to_single )
+			{
+				position_list[ i ] = position;
+			}
+			else {
+				Transform instance = Instantiate( prefab ).transform;
+				instance.SetParent( transform , true );
+				instance.localScale = prefab.transform.localScale;
+				instance.transform.position = position;
+			}
+		}
+
+		if ( merge_to_single )
+		{
+			gameObject.AddComponent<MergeQuad>().Create( position_list , prefab.transform.localScale , prefab.GetComponent<MeshRenderer>().sharedMaterial );
 		}
 	}
 }

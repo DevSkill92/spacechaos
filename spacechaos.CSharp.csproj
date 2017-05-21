@@ -110,6 +110,7 @@
     <Compile Include="Assets\Intern\Scripts\Screen\PlayerAmount.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Result.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Title.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\MergeQuad.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Track.cs" />
     <Compile Include="Assets\Intern\Scripts\View\TrackCreator.cs" />

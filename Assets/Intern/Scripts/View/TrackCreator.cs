@@ -93,6 +93,8 @@ public class TrackCreator : MonoBehaviour
 
 		MeshRenderer renderer = obj.AddComponent<MeshRenderer>();
 		renderer.material = material;
+		renderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
+		renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
 		this.vertices = vertices;
 	}
