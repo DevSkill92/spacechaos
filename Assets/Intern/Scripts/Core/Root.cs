@@ -32,7 +32,8 @@ public class Root
 	public void Reload()
 	{
 		instance = null;
-		SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+		int scene = SceneManager.GetActiveScene().buildIndex;
+		SceneManager.LoadScene( scene );
 	}
 
 	public T Get<T>() where T : RootComponent

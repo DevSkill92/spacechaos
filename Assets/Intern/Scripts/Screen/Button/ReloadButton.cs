@@ -10,6 +10,8 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class ReloadButton : MonoBehaviour
 {
+	private bool triggered = false;
+
 	/// <summary>
 	/// auto add trigger
 	/// </summary>
@@ -32,6 +34,17 @@ public class ReloadButton : MonoBehaviour
 	/// <param name="data"></param>
 	public virtual void HandleClick( BaseEventData data )
 	{
-		Root.I.Reload();
+		triggered = true;
+	}
+
+	/// <summary>
+	/// Force reload after all Update functions are complete
+	/// </summary>
+	private void LateUpdate()
+	{
+		if ( triggered )
+		{
+			Root.I.Reload();
+		}
 	}
 }

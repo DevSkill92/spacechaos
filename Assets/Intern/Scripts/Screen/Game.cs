@@ -168,7 +168,6 @@ public class Game : Screen {
 		{
 			score_panel.Show( score );
 		}
-
 	}
 
 	/// <summary>
