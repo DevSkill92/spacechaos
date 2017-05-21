@@ -94,6 +94,7 @@
     <Compile Include="Assets\Intern\Scripts\Gameplay\AliveTriggerCreator.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\CaptureLine.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\LeaderFollower.cs" />
+    <Compile Include="Assets\Intern\Scripts\Gameplay\MusicMixer.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\Planet.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\Player.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\RequireAliveTrigger.cs" />

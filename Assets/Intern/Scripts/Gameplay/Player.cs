@@ -65,6 +65,18 @@ public class Player : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Gets the player is currently capturing
+	/// </summary>
+	public bool Capturing
+	{
+		get
+		{
+			return capture_line.gameObject.activeInHierarchy;
+		}
+	}
+
+
+	/// <summary>
 	/// Bind user index
 	/// </summary>
 	/// <param name="joy"></param>
