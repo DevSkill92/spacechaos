@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
 		alive_creator.enabled = true;
 		leader_trigger.gameObject.SetActive( true );
 		alive_trigger.gameObject.SetActive( true );
-		car.SetPower( 24 , 15 , 50 , 0 );
+		car.SetPower( 36.6f , 15 , 50 , 0 );
 	}
 
 	/// <summary>
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.gameObject.SetActive( false );
 		alive_creator.enabled = false;
-		car.SetPower( 30 , 0 , 130 , 200 );
+		car.SetPower( 40 , 0 , 130 , 200 );
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
 		alive_trigger.gameObject.SetActive( false );

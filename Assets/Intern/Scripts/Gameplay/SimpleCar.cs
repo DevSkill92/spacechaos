@@ -20,6 +20,8 @@ public class SimpleCar : MonoBehaviour
 	public float max_steer = 200;
 	[SerializeField]
 	private float speed_breacker_damp = 10f;
+	[SerializeField]
+	private float speed_breacker_factor = 0.5f;
 
 	private float speed;
 	private float steer;
@@ -74,7 +76,7 @@ public class SimpleCar : MonoBehaviour
 		if ( 0 < speed_breacker )
 		{
 			speed_breacker -= speed_breacker_damp * Time.deltaTime;
-			current_speed_max = ( 1 - ( speed_breacker / speed_breacker_max ) ) * speed_max;
+			current_speed_max = ( 1 - ( ( speed_breacker / speed_breacker_max ) * speed_breacker_factor ) ) * speed_max;
 		}
 
 		// cap speed
