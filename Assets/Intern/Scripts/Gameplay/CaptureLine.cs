@@ -42,19 +42,16 @@ public class CaptureLine : MonoBehaviour
 		{
 			Vector3 position = container.transform.position;
 			Vector3 target_pos = current_target.transform.position;
+			Vector3 center = Vector3.Lerp( target_pos , position , 0.5f );
 			float distance = Vector3.Distance( position , target_pos );
 
-			transform.LookAt( new Vector3(
-				target_pos.x ,
-				position.y ,
-				target_pos.y
-			));
+			transform.LookAt( target_pos );
 
-			transform.position = ( target_pos - position ) * 0.5f;
-			transform.localScale = new Vector3( 1 , distance , 1 );
+			transform.position = center;
+			transform.localScale = new Vector3( 1 , 1 , distance );
 
-			material.mainTextureScale = new Vector2( 1 , distance );
-			material.SetFloat( "_Time" , Time.time );
+			material.mainTextureScale = new Vector2( 1 , distance / 100 );
+			material.mainTextureOffset = new Vector2( 0 , Time.time * 2 );
 		}
 	}
 
@@ -66,6 +63,7 @@ public class CaptureLine : MonoBehaviour
 	{
 		current_target = target;
 		last_show = Time.time;
+		gameObject.transform.SetParent( null );
 		gameObject.SetActive( true );
 	}
 }

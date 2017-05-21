@@ -28,7 +28,7 @@ class RandomInstance : MonoBehaviour
 			instance.localScale = Vector3.one;
 			instance.transform.position = new Vector3(
 				Random.Range( range.x , range.y ) ,
-				0 != height ? height : Random.Range( range.x , range.y ) * random_height_factor,
+				0 != height ? height : Random.Range( range.x , 0 ) * random_height_factor,
 				Random.Range( range.x , range.y )
 			);
 		}

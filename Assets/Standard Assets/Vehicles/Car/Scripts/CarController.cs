@@ -20,7 +20,6 @@ namespace UnityStandardAssets.Vehicles.Car
     {
         [SerializeField] private CarDriveType m_CarDriveType = CarDriveType.FourWheelDrive;
         [SerializeField] private WheelCollider[] m_WheelColliders = new WheelCollider[4];
-        [SerializeField] private GameObject[] m_WheelMeshes = new GameObject[4];
         [SerializeField] private Vector3 m_CentreOfMassOffset;
         [SerializeField] public float m_MaximumSteerAngle;
         [Range(0, 1)] [SerializeField] private float m_SteerHelper; // 0 is raw physics , 1 the car will grip in the direction it is facing
@@ -31,15 +30,14 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_Downforce = 100f;
         [SerializeField] private SpeedType m_SpeedType;
         [SerializeField] public float m_Topspeed = 200;
-        [SerializeField] private static int NoOfGears = 5;
+        [SerializeField] private static int NoOfGears = 1;
         [SerializeField] private float m_RevRangeBoundary = 1f;
         [SerializeField] private float m_SlipLimit;
         [SerializeField] private float m_BrakeTorque;
-
-        private Quaternion[] m_WheelMeshLocalRotations;
+		
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
-        private int m_GearNum;
+        private int m_GearNum = 1;
         private float m_GearFactor;
         private float m_OldRotation;
         private float m_CurrentTorque;
@@ -57,11 +55,6 @@ namespace UnityStandardAssets.Vehicles.Car
         // Use this for initialization
         private void Start()
         {
-            m_WheelMeshLocalRotations = new Quaternion[4];
-            for (int i = 0; i < 4; i++)
-            {
-                m_WheelMeshLocalRotations[i] = m_WheelMeshes[i].transform.localRotation;
-            }
             m_WheelColliders[0].attachedRigidbody.centerOfMass = m_CentreOfMassOffset;
 
             m_MaxHandbrakeTorque = float.MaxValue;
@@ -132,8 +125,6 @@ namespace UnityStandardAssets.Vehicles.Car
                 Quaternion quat;
                 Vector3 position;
                 m_WheelColliders[i].GetWorldPose(out position, out quat);
-                m_WheelMeshes[i].transform.position = position;
-                m_WheelMeshes[i].transform.rotation = quat;
             }
 
             //clamp input values

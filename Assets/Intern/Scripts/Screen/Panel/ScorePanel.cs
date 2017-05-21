@@ -33,7 +33,7 @@ public class ScorePanel : MonoBehaviour
 		// clear
 		foreach( Transform child in entry_container )
 		{
-			DestroyImmediate( child );
+			Destroy( child.gameObject );
 		}
 
 		// create new entries

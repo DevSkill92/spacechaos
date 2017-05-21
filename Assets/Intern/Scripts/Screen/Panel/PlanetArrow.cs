@@ -32,19 +32,27 @@ public class PlanetArrow : MonoBehaviour
 		Player leader = game.Leader;
 		if ( null == leader )
 		{
+			color_image.enabled = false;
 			return;
 		}
+
 
 		if ( last_leader != leader )
 		{
 			last_leader = leader;
 			color_image.color = player_color[ leader.Index ];
+			color_image.enabled = true;
 		}
 
 		Planet nearest = null;
 		float nearst_dst = float.MaxValue;
 		foreach( Planet planet in game.PlanetList )
 		{
+			if ( planet.Owner == leader )
+			{
+				continue;
+			}
+
 			float dst = Vector3.Distance( leader.transform.position , planet.transform.position );
 			if ( dst < nearst_dst )
 			{
@@ -56,7 +64,7 @@ public class PlanetArrow : MonoBehaviour
 		transform.rotation = Quaternion.Euler(new Vector3(
 			0,
 			0,
-			Mathf.Atan( nearest.transform.position.x - leader.transform.position.x - nearest.transform.position.x - leader.transform.position.x )
+			( ( Mathf.Atan2( nearest.transform.position.z - leader.transform.position.z , nearest.transform.position.x - leader.transform.position.x ) / ( Mathf.PI * 2 ) ) * 360 ) - 90
 		));
 	}
 }

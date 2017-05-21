@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityStandardAssets.Vehicles.Car;
@@ -42,21 +43,13 @@ public class Planet : MonoBehaviour
 	// Decrease player progress
 	private void Update()
 	{
-		List<Player> remove_player = new List<Player>();
-
 		// decrease progress
-		foreach( Player player in player_progress.Keys )
+		foreach ( Player player in player_progress.Keys.ToArray() )
 		{
 			player_progress[ player ] -= decrease_speed * Time.deltaTime;
 			if ( 0 >= player_progress[ player ] ) {
-				remove_player.Add( player );
+				player_progress[ player ] = 0;
 			}
-		}
-
-		// remove outdated players
-		foreach( Player player in remove_player )
-		{
-			player_progress.Remove( player );
 		}
 	}
 
@@ -64,11 +57,15 @@ public class Planet : MonoBehaviour
 	/// Capturing progress
 	/// </summary>
 	/// <param name="player"></param>
-	public void Capture( Player player )
+	public bool Capture( Player player )
 	{
-		if ( last_capture > Time.time - cooldown )
+		if ( 
+			last_capture > Time.time - cooldown
+			|| Owner == player
+			|| player != Root.I.Get<ScreenManager>().Get<Game>().Leader
+		)
 		{
-			return;
+			return false;
 		}
 
 		if ( !player_progress.ContainsKey( player ) )
@@ -76,12 +73,14 @@ public class Planet : MonoBehaviour
 			player_progress.Add( player , 0 );
 		}
 
-		player_progress[ player ] = Time.deltaTime * increase_speed;
+		player_progress[ player ] += Time.deltaTime * increase_speed;
 
 		if ( player_progress[ player ] > max_amount )
 		{
 			capture_complete( player );
 		}
+
+		return true;
 	}
 
 	/// <summary>

@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 		track.gameObject.SetActive( true );
 		alive_creator.enabled = true;
 		leader_trigger.gameObject.SetActive( true );
-		controll.m_Topspeed = 150;
+		controll.m_Topspeed = 50;
 		controll.m_MaximumSteerAngle = 10;
 	}
 
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.gameObject.SetActive( false );
 		alive_creator.enabled = false;
-		controll.m_Topspeed = 50;
+		controll.m_Topspeed = 150;
 		controll.m_MaximumSteerAngle = 25;
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
@@ -155,9 +155,11 @@ public class Player : MonoBehaviour
 		}
 
 		Planet planet = collider.GetComponent<Planet>();
-		if ( null != planet )
+		if (
+			null != planet
+			&& planet.Capture( this )
+		)
 		{
-			planet.Capture( this );
 			capture_line.Show( planet );
 		}
 	}
