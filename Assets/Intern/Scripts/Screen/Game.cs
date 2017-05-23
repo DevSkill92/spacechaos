@@ -124,9 +124,10 @@ public class Game : Screen {
 			trigger.gameObject.SetActive( false );
 		}
 
-		if ( null != leader )
+		// make sure that all players are follower
+		foreach( Player p in player_list )
 		{
-			leader.Follower();
+			p.Follower();
 		}
 
 		leader = player;

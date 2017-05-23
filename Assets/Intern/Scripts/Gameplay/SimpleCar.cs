@@ -30,6 +30,22 @@ public class SimpleCar : MonoBehaviour
 	public float speed_breacker = 0;
 	public float speed_breacker_max = 0;
 
+	public float Steer
+	{
+		get
+		{
+			return steer;
+		}
+	}
+
+	public float Speed
+	{
+		get
+		{
+			return speed;
+		}
+	}
+
 	/// <summary>
 	/// Binds the used input index
 	/// </summary>
@@ -82,9 +98,7 @@ public class SimpleCar : MonoBehaviour
 		// cap speed
 		speed = Mathf.Max( speed_min , Mathf.Min( current_speed_max , speed ) );
 
-		steer = Mathf.Max( -max_steer , Mathf.Min( max_steer , steer ) );
-
-		rotation += input_rotation * Time.deltaTime * max_steer * Mathf.Min( speed , 1 );
+		rotation += steer = input_rotation * Time.deltaTime * max_steer * Mathf.Min( speed , 1 );
 		transform.rotation = Quaternion.Euler( new Vector3( 0 , rotation , 0 ) );
 
 		transform.position += transform.forward * speed * Time.deltaTime;

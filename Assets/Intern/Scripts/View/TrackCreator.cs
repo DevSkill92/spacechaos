@@ -10,11 +10,17 @@ using UnityEngine;
 public class TrackCreator : MonoBehaviour
 {
 	[SerializeField]
-	private int length = 100;
+	private int length = 200;
+	[ SerializeField]
+	private float interval = 0.1f;
+	[SerializeField]
+	private float steer_cut = 0.01f;
 	[SerializeField]
 	private Transform container;
 	[SerializeField]
 	private Material material;
+	[SerializeField]
+	private int fade = 6;
 
 	private List<Vector3> vertices = new List<Vector3>();
 	private List<int> indieces = new List<int>();
@@ -23,11 +29,12 @@ public class TrackCreator : MonoBehaviour
 
 	private float last_update;
 	private int y_uv;
+	private float last_steer;
 
 	/// <summary>
 	/// Generates a new sement
 	/// </summary>
-	public void create_track( Transform left_anchor , Transform right_anchor )
+	public void create_track( Transform left_anchor , Transform right_anchor , float steer )
 	{
 		foreach( Transform child in container )
 		{
@@ -43,9 +50,20 @@ public class TrackCreator : MonoBehaviour
 		}
 
 		// appendd vertices
-		vertices.Add( left_anchor.transform.position );
-		vertices.Add( right_anchor.transform.position );
-		Debug.Log( left_anchor.transform.position );
+		if ( 4 <= vertices.Count )
+		{
+			vertices.Add( find_vertrex_position( left_anchor.transform.position , vertices[ vertices.Count - 2 ] , steer , last_steer , 1 ) );
+			vertices.Add( find_vertrex_position( right_anchor.transform.position , vertices[ vertices.Count - 2 ] , steer , last_steer , -1 ) );
+		}
+		else
+		{
+			vertices.Add( left_anchor.transform.position );
+			vertices.Add( right_anchor.transform.position );
+		}
+
+		last_steer = steer;
+
+
 		int count = vertices.Count;
 
 		// append uvs
@@ -100,22 +118,22 @@ public class TrackCreator : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 
+	/// Update track mesh
 	/// </summary>
 	/// <param name="left_anchor"></param>
 	/// <param name="right_anchor"></param>
-	public void UpdateTrack( Transform left_anchor , Transform right_anchor , Color color )
+	public void UpdateTrack( Transform left_anchor , Transform right_anchor , Color color , float steer )
 	{
 		float time = Time.time;
-		if ( time - 0.2 > last_update )
+		if ( time - interval > last_update )
 		{
 			last_update = Time.time;
 
-			create_track( left_anchor , right_anchor );
+			create_track( left_anchor , right_anchor , steer );
 		}
 
 		material.color = color;
-		material.SetFloat( "_Progress" , ( ( time - last_update ) / 0.2f ) );
+		material.SetFloat( "_Fade" , ( ( time - last_update ) / interval ) / fade );
 	}
 
 	/// <summary>
@@ -131,29 +149,54 @@ public class TrackCreator : MonoBehaviour
 			normal[ i ] = Vector3.up;
 		}
 
-		if ( 6 < vertext_count )
+		if ( 2 < vertext_count )
 		{
+			int vertex_fade = Math.Min( fade , ( vertext_count / 2 ) - 2 ) * 2;
+
 			// add end factor
-			float factor = 0.6f;
-			for ( int i = 0 ; i < 6 ; i += 2 )
+			if ( length - 2 <= vertext_count )
 			{
-				normal[ i ].z = factor;
-				normal[ i + 1 ].z = factor;
-				factor -= 0.2f;
+				for ( int i = 0 ; i < vertex_fade ; i += 2 )
+				{
+					normal[ i ].z = 1f - ((float)i / vertex_fade);
+					normal[ i + 1 ].z = 1f - ( (float)i / vertex_fade );
+					normal[ i ].x = -1;
+					normal[ i + 1 ].x = -1;
+				}
 			}
 
 			// add begin factor
-			factor = 0.6f;
-			for ( int i = 1 ; i <= 6 ; i += 2 )
+			normal[ vertext_count - 1 ].z = 1;
+			normal[ vertext_count - 2 ].z = 1;
+			for ( int i = 3 ; i <= vertex_fade + 2 ; i += 2 )
 			{
-				normal[ vertext_count - i ].z = factor;
-				normal[ vertext_count - i - 1 ].z = factor;
+				normal[ vertext_count - i ].z = 1f - ( (float)(i-3) / vertex_fade );
+				normal[ vertext_count - i - 1 ].z = 1f - ( (float)(i-3) / vertex_fade );
 				normal[ vertext_count - i ].x = 1;
 				normal[ vertext_count - i - 1 ].x = 1;
-				factor -= 0.2f;
 			}
 		}
 
 		return normal;
+	}
+
+	/// <summary>
+	/// Find a nice new vertix postition without overlays
+	/// </summary>
+	/// <param name="current"></param>
+	/// <param name="last"></param>
+	private Vector3 find_vertrex_position( Vector3 current , Vector3 previous , float steer , float last_steer , float direction )
+	{
+		float distance = Vector3.Distance( current , previous );
+
+		if (
+			( steer * direction ) * steer_cut > distance
+			|| ( last_steer * direction ) * steer_cut > distance
+		)
+		{
+			return previous;
+		}
+
+		return current;
 	}
 }

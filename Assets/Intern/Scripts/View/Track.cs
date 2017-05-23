@@ -15,9 +15,41 @@ public class Track : MonoBehaviour
 	private Transform right_anchor;
 	[SerializeField]
 	private Player player;
+	[SerializeField]
+	private SimpleCar car;
+	[SerializeField]
+	private float start_delay = 0.15f;
+
+	private bool enabled = false;
+	private float enabled_date;
+
+	/// <summary>
+	/// Enables the track
+	/// </summary>
+	public void Enable()
+	{
+		enabled = true;
+		gameObject.SetActive( enabled );
+		enabled_date = Time.time;
+	}
+
+	/// <summary>
+	/// Disables the track
+	/// </summary>
+	public void Disable()
+	{
+		enabled = false;
+		gameObject.SetActive( enabled );
+	}
 
 	private void Update()
 	{
-		Root.I.Get<ScreenManager>().Get<Game>().TrackCreator.UpdateTrack( left_anchor , right_anchor , player.Color );
+		if ( 
+			enabled
+			&& Time.time > enabled_date + start_delay
+		)
+		{
+			Root.I.Get<ScreenManager>().Get<Game>().TrackCreator.UpdateTrack( left_anchor , right_anchor , player.Color , car.Steer );
+		}
 	}
 }

@@ -138,11 +138,11 @@ public class Player : MonoBehaviour
 	{
 		on_lead.Invoke();
 		body.material = skin_leader[ index ];
-		track.gameObject.SetActive( true );
+		track.Enable();
 		alive_creator.enabled = true;
 		leader_trigger.gameObject.SetActive( true );
 		alive_trigger.gameObject.SetActive( true );
-		car.SetPower( 36.6f , 15 , 50 , 0 );
+		car.SetPower( 37 , 15 , 95 , 0 );
 	}
 
 	/// <summary>
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
 	{
 		body.material = skin[ index ];
 		on_follow.Invoke();
-		track.gameObject.SetActive( false );
+		track.Disable();
 		alive_creator.enabled = false;
 		car.SetPower( 40 , 0 , 130 , 200 );
 		alive.ForceAlive();

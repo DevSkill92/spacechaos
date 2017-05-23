@@ -2,7 +2,7 @@
 	Properties{
 		_MainTex( "Texture", 2D ) = "white" {}
 		_Color( "Color", Color ) = (1,1,1,1)
-		_Progress( "Range", Range( 0 , 1 ) ) = 1
+		_Fade( "float", float ) = 1
 	}
 		SubShader{
 		Tags{ "RenderType" = "Opaque" }
@@ -20,7 +20,7 @@
 	}
 	sampler2D _MainTex;
 	float4  _Color;
-	float _Progress;
+	float _Fade;
 	
 	void surf( Input IN, inout SurfaceOutput o ) {
 		float4 tex = tex2D( _MainTex, IN.uv_MainTex );
@@ -28,7 +28,7 @@
 		_Color.a = 1;
 		o.Emission = tex.rgb * _Color;
 		
-		o.Alpha = tex.a * max( min( ( ( IN.normal.z - ( 0.2 + ( 1 - abs( IN.normal.x - _Progress ) ) * 0.2 ) ) * -1 ) * 5 , 1 ) , 0 );
+		o.Alpha = tex.a * min( 1 , ( 1 - IN.normal.z ) + ( _Fade * IN.normal.x ) );
 	}
 	ENDCG
 	}

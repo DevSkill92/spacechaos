@@ -8,9 +8,9 @@ class RandomInstance : MonoBehaviour
 	[SerializeField]
 	private Vector2 range = new Vector2( -5000 , 5000 );
 	[SerializeField]
-	private float height = 0;
+	private Vector2 range_height = new Vector2( -5000 , 5000 );
 	[SerializeField]
-	private float random_height_factor = 0.1f;
+	private float height = 0;
 	[SerializeField]
 	private int amount = 1000;
 	[SerializeField]
@@ -29,7 +29,7 @@ class RandomInstance : MonoBehaviour
 		{
 			Vector3 position = new Vector3(
 				Random.Range( range.x , range.y ) ,
-				0 != height ? height : Random.Range( range.x , 0 ) * random_height_factor ,
+				0 != height ? height : Random.Range( range_height.x , range_height.y ) ,
 				Random.Range( range.x , range.y )
 			);
 
