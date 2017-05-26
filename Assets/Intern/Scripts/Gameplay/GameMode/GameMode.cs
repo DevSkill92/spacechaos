@@ -84,6 +84,17 @@ public abstract class GameMode
 	}
 
 	/// <summary>
+	/// Timeout for rounds 0 = no timeout
+	/// </summary>
+	public virtual float Timeout
+	{
+		get
+		{
+			return 0;
+		}
+	}
+
+	/// <summary>
 	/// Gets all allowed options of this mode
 	/// </summary>
 	public virtual GameConfig AllowedConfig

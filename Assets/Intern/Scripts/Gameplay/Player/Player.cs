@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
 	private UnityEvent on_lead = new UnityEvent();
 	public UnityEvent OnLead { get { return on_lead; } }
 	[SerializeField]
+	private UnityEvent on_attach_weapon = new UnityEvent();
+	public UnityEvent OnAttachWeapon { get { return on_attach_weapon; } }
+	[SerializeField]
 	private UnityEvent on_enable = new UnityEvent();
 	public UnityEvent OnEnable { get { return on_enable; } }
 	[SerializeField]
@@ -299,6 +302,8 @@ public class Player : MonoBehaviour
 		weapon.transform.SetParent( weapon_container , true );
 		weapon.transform.localPosition = Vector3.forward;
 		weapon.transform.rotation = Quaternion.LookRotation( transform.forward );
+
+		on_attach_weapon.Invoke();
 
 		this.weapon = weapon;
 	}

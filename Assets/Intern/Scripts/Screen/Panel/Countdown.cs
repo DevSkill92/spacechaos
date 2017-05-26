@@ -61,6 +61,8 @@ public class Countdown : MonoBehaviour
 				player.Enable();
 			}
 
+			Root.I.Get<ScreenManager>().Get<Game>().StartTimer();
+
 			return;
 		}
 

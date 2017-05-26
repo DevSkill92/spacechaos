@@ -13,9 +13,12 @@ public class Game : Screen {
 	[SerializeField]
 	private Countdown countdown;
 	[SerializeField]
+	private RoundTimer round_timer;
+	[SerializeField]
 	private Collider[] initial_leader_trigger;
 
-	private GameModeManager score;
+	private GameModeManager mode;
+	private float last_score_update;
 	private PlayerManager player;
 
 	/// <summary>
@@ -60,9 +63,19 @@ public class Game : Screen {
 			trigger.gameObject.SetActive( true );
 		}
 
-		score = Root.I.Get<GameModeManager>();
+		mode = Root.I.Get<GameModeManager>();
 		player = Root.I.Get<PlayerManager>();
 		player.OnKillAll.AddListener( Exit );
+
+		round_timer.gameObject.SetActive( false );
+	}
+
+	/// <summary>
+	/// Start round timer
+	/// </summary>
+	public void StartTimer()
+	{
+		round_timer.Bind( mode.Timeout );
 	}
 
 	/// <summary>
@@ -75,7 +88,11 @@ public class Game : Screen {
 			Exit();
 		}
 
-		score.Update();
+		if ( Time.time - 1 > last_score_update )
+		{
+			last_score_update = Time.time;
+			mode.Update();
+		}
 	}
 
 	/// <summary>
@@ -101,13 +118,13 @@ public class Game : Screen {
 	/// </summary>
 	public void Exit()
 	{
-		if ( score.EmptyResult )
+		if ( mode.EmptyResult )
 		{
 			Root.I.Reload();
 			return;
 		}
 
-		score.ShowGameResult();
+		mode.ShowGameResult();
 	}
 
 }

@@ -93,6 +93,17 @@ public class GameModeManager : IRootObject
 	}
 
 	/// <summary>
+	/// Timeout for rounds 0 = no timeout
+	/// </summary>
+	public virtual float Timeout
+	{
+		get
+		{
+			return mode.Timeout;
+		}
+	}
+
+	/// <summary>
 	/// Binds the config
 	/// </summary>
 	/// <param name="name"></param>

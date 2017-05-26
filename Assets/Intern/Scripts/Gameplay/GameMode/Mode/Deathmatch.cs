@@ -34,6 +34,17 @@ public class Deathmatch : GameMode
 	}
 
 	/// <summary>
+	/// Limit round to 5min
+	/// </summary>
+	public override float Timeout
+	{
+		get
+		{
+			return 300;
+		}
+	}
+
+	/// <summary>
 	/// Gets all allowed options of this mode
 	/// </summary>
 	public override GameConfig AllowedConfig

@@ -24,6 +24,17 @@ public class Timescore : GameMode
 		}
 	}
 
+	/// <summary>
+	/// Limit round to 5min
+	/// </summary>
+	public override float Timeout
+	{
+		get
+		{
+			return 300;
+		}
+	}
+
 	public override int GetScore( Player player )
 	{
 		int result = 0;

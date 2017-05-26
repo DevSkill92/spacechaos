@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class Weapon : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class Weapon : MonoBehaviour
 	protected float cooldown;
 	[SerializeField]
 	protected int max_ammunition;
+
+	[SerializeField]
+	private UnityEvent on_shoot = new UnityEvent();
+	public UnityEvent OnShoot { get { return on_shoot; } }
 
 	private int ammunition;
 	private float last_shoot;
@@ -90,6 +95,8 @@ public class Weapon : MonoBehaviour
 		Bullet bullet = container.GetComponent<Bullet>();
 		bullet.transform.position = transform.position;
 		bullet.Bind( owner , direction );
+
+		on_shoot.Invoke();
 	}
 
 	/// <summary>
