@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// Track creator
 /// </summary>
-public class TrackCreator : MonoBehaviour
+public class TrackCreator : RootGameComponent
 {
 	[SerializeField]
 	private int length = 200;
@@ -198,5 +198,28 @@ public class TrackCreator : MonoBehaviour
 		}
 
 		return current;
+	}
+
+	/// <summary>
+	/// Sets the tranform to respoawn point if possible
+	/// </summary>
+	/// <param name="target"></param>
+	/// <returns></returns>
+	public bool SetRespawnTransform( Transform target )
+	{
+		if ( length / 2 <= vertices.Count )
+		{
+			int index = vertices.Count - (int)Math.Round( (float)vertices.Count / 3 , 0 , MidpointRounding.ToEven );
+
+			Vector3 position = Vector3.Lerp( vertices[ index ] , vertices[ index + 1 ] , 0.5f );
+			Vector3 next = Vector3.Lerp( vertices[ index + 3 ] , vertices[ index + 4 ] , 0.5f );
+			float rotation = ( ( Mathf.Atan2( position.x - next.x , position.z - next.z ) / ( Mathf.PI * 2 ) ) * 360 ) + 180;
+
+			target.position = position;
+			target.rotation = Quaternion.Euler( 0 , rotation , 0 );
+			return true;
+		}
+
+		return false;
 	}
 }

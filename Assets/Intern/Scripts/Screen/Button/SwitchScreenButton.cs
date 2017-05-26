@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// A ui helper to switch to given screen
 /// </summary>
-public class SwitchScreenButton : MonoBehaviour
+public class SwitchScreenButton : ButtonHandler
 {
 	[SerializeField]
 	private Screen target;
@@ -25,26 +25,10 @@ public class SwitchScreenButton : MonoBehaviour
 	}
 
 	/// <summary>
-	/// auto add trigger
-	/// </summary>
-	void Start()
-	{
-		EventTrigger trigger = GetComponent<EventTrigger>();
-		if ( null == trigger )
-		{
-			EventTrigger.Entry entry = new EventTrigger.Entry();
-			entry.eventID = EventTriggerType.PointerClick;
-			entry.callback.AddListener( HandleClick );
-
-			gameObject.AddComponent<EventTrigger>().triggers.Add( entry );
-		}
-	}
-
-	/// <summary>
 	/// Do the swith
 	/// </summary>
 	/// <param name="data"></param>
-	public virtual void HandleClick( BaseEventData data )
+	public override void HandleClick( BaseEventData data )
 	{
 		if ( null != target )
 		{

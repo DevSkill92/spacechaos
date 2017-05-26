@@ -8,8 +8,6 @@ class Intro : MonoBehaviour
 {
 	[SerializeField]
 	private Vector3 speed;
-	[SerializeField]
-	private float timeout;
 
 	private float start;
 
@@ -20,9 +18,15 @@ class Intro : MonoBehaviour
 
 	private void Update()
 	{
-		transform.position += speed * Time.deltaTime;
+		float input_speed = 1;
+		for( int i = 0 ; i <= 4 ; i++ )
+		{
+			input_speed += Input.GetAxis( "Vertical" + i ) * 2;
+		}
 
-		if ( Time.time - timeout > start )
+		transform.position += speed * Time.deltaTime * input_speed;
+
+		if ( 270 < transform.position.z )
 		{
 			SceneManager.LoadScene( "main" );
 		}

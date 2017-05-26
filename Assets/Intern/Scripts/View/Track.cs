@@ -49,7 +49,7 @@ public class Track : MonoBehaviour
 			&& Time.time > enabled_date + start_delay
 		)
 		{
-			Root.I.Get<ScreenManager>().Get<Game>().TrackCreator.UpdateTrack( left_anchor , right_anchor , player.Color , car.Steer );
+			Root.I.Get<TrackCreator>().UpdateTrack( left_anchor , right_anchor , player.Color , car.Steer );
 		}
 	}
 }

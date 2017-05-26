@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Root
 {
 	private static Root instance;
-	public Dictionary<Type , RootComponent> component = new Dictionary<Type , RootComponent>();
+	public Dictionary<Type , IRootObject> component = new Dictionary<Type , IRootObject>();
 
 	public static Root I
 	{
@@ -39,15 +39,32 @@ public class Root
 		});
 	}
 
-	public T Get<T>() where T : RootComponent
+	/// <summary>
+	/// Gets or creates a root component
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	public T Get<T>() where T : IRootObject , new()
 	{
 		Type type = typeof( T );
 		if ( !component.ContainsKey( type ) )
 		{
-			UnityEngine.Object obj = GameObject.FindObjectOfType( type );
-			component.Add( type , obj as T );
-		}
+			if ( type.IsSubclassOf( typeof( RootComponent ) ) )
+			{
+				UnityEngine.Object obj = GameObject.FindObjectOfType( type );
+				if ( null != obj )
+				{
+					component.Add( type , obj as IRootObject );
+				}
 
-		return component[ type ] as T;
+				return (T)( obj as IRootObject );
+			}
+			else
+			{
+				component[ type ] = new T();
+			}
+		}
+		
+		return (T)component[ type ];
 	}
 }

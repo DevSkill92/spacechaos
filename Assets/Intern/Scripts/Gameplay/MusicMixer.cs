@@ -13,11 +13,17 @@ public class MusicMixer : MonoBehaviour
 	private float transition_speed;
 
 	/// <summary>
-	/// Trigger transition
+	/// Trigger transitions
 	/// </summary>
 	private void Update()
 	{
-		Player leader = Root.I.Get<ScreenManager>().Get<Game>().Leader;
+		PlayerManager manager = Root.I.Get<PlayerManager>();
+		if ( null == manager )
+		{
+			return;
+		}
+
+		Player leader = manager.Leader;
 
 		if (
 			null != leader

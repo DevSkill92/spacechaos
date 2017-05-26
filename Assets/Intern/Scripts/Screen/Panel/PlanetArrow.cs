@@ -6,20 +6,21 @@ using System.Linq;
 /// <summary>
 /// A UI arrow which shows the next planet
 /// </summary>
-public class PlanetArrow : MonoBehaviour
+public class PlanetArrow : RootGameComponent
 {
 	[SerializeField]
 	private Image color_image;
 
 	private Player last_leader;
-	private Game game;
+	private bool allow_capture;
 
 	/// <summary>
 	/// Store game instance
 	/// </summary>
-	private void Start()
+	public override void Enter()
 	{
-		game = Root.I.Get<ScreenManager>().Get<Game>();
+		base.Enter();
+		allow_capture = Root.I.Get<GameModeManager>().AllowCapture;
 	}
 
 	/// <summary>
@@ -27,8 +28,17 @@ public class PlanetArrow : MonoBehaviour
 	/// </summary>
 	private void Update()
 	{
-		Player leader = game.Leader;
-		if ( null == leader )
+		PlayerManager player_manager = Root.I.Get<PlayerManager>();
+		if ( null == player_manager )
+		{
+			return;
+		}
+
+		Player leader = player_manager.Leader;
+		if (
+			!allow_capture
+			|| null == leader
+		)
 		{
 			color_image.enabled = false;
 			return;
@@ -44,7 +54,7 @@ public class PlanetArrow : MonoBehaviour
 
 		Planet nearest = null;
 		float nearst_dst = float.MaxValue;
-		foreach( Planet planet in game.PlanetList )
+		foreach( Planet planet in Root.I.Get<PlanetManager>().All )
 		{
 			if ( planet.Owner == leader )
 			{

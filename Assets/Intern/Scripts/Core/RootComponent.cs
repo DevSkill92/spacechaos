@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public abstract class RootComponent : MonoBehaviour
+public abstract class RootComponent : MonoBehaviour , IRootObject
 {
 }

@@ -26,7 +26,7 @@ public class Countdown : MonoBehaviour
 			Destroy( child );
 		}
 
-		foreach( Player player in Root.I.Get<ScreenManager>().Get<Game>().PlayerList )
+		foreach( Player player in Root.I.Get<PlayerManager>().All )
 		{
 			player.Disable();
 		}
@@ -56,7 +56,7 @@ public class Countdown : MonoBehaviour
 		{
 			gameObject.SetActive( false );
 
-			foreach ( Player player in Root.I.Get<ScreenManager>().Get<Game>().PlayerList )
+			foreach ( Player player in Root.I.Get<PlayerManager>().All )
 			{
 				player.Enable();
 			}
