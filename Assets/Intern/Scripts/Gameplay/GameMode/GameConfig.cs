@@ -15,6 +15,23 @@ public class GameConfig
 	public string ModeName;
 
 	/// <summary>
+	/// Clone this item into a new instance
+	/// </summary>
+	/// <returns></returns>
+	public GameConfig Clone()
+	{
+		return new GameConfig() {
+			Teamplay = Teamplay ,
+			GamepadOnly = GamepadOnly ,
+			AllowItem = AllowItem ,
+			AllowRespawn = AllowRespawn ,
+			Online = Online ,
+			PlayerAmount = PlayerAmount ,
+			ModeName = ModeName
+		};
+	}
+
+	/// <summary>
 	/// Validate to given allowed config
 	/// </summary>
 	/// <param name="allowed"></param>

@@ -55,6 +55,9 @@ public class Player : MonoBehaviour
 	private int index;
 	private int kill_count;
 	private float health;
+	private bool is_leader = false;
+	private float leader_time;
+	private float last_leader_time_update;
 	private float last_planet_switch;
 	private Collider last_planet;
 	private Weapon weapon;
@@ -100,6 +103,17 @@ public class Player : MonoBehaviour
 		get
 		{
 			return index;
+		}
+	}
+
+	/// <summary>
+	/// Gets the amount of secounds during l
+	/// </summary>
+	public float LeaderTime
+	{
+		get
+		{
+			return leader_time;
 		}
 	}
 
@@ -196,6 +210,9 @@ public class Player : MonoBehaviour
 		leader_trigger.gameObject.SetActive( true );
 		alive_trigger.gameObject.SetActive( true );
 		car.SetPower( 37 , 15 , 95 , 0 );
+
+		is_leader = true;
+		last_leader_time_update = Time.time;
 	}
 
 	/// <summary>
@@ -211,6 +228,8 @@ public class Player : MonoBehaviour
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
 		alive_trigger.gameObject.SetActive( false );
+
+		is_leader = false;
 	}
 
 	/// <summary>
@@ -274,6 +293,8 @@ public class Player : MonoBehaviour
 
 	private void Update()
 	{
+		float time = Time.time;
+
 		if (
 			null != weapon
 			&& Input.GetButton( "Shoot" + joy )
@@ -282,6 +303,16 @@ public class Player : MonoBehaviour
 		)
 		{
 			weapon.Shoot();
+		}
+
+		if (
+			is_leader
+			&& time - 1 > last_leader_time_update 
+		)
+		{
+			leader_time += Mathf.Floor( time - last_leader_time_update );
+			last_leader_time_update = time;
+
 		}
 	}
 

@@ -99,6 +99,7 @@
     <Compile Include="Assets\Intern\Scripts\Gameplay\GameMode\Mode\Capture.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\GameMode\Mode\Deathmatch.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\GameMode\Mode\Timescore.cs" />
+    <Compile Include="Assets\Intern\Scripts\Gameplay\GameMode\ScoreSet.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\Item\Item.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\Item\ItemManager.cs" />
     <Compile Include="Assets\Intern\Scripts\Gameplay\Item\WeaponItem.cs" />
@@ -118,10 +119,10 @@
     <Compile Include="Assets\Intern\Scripts\Screen\Button\ButtonHandler.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\GameModeButton.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\PlayerAmountButton.cs" />
-    <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleTeamplay.cs" />
-    <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleAllowRespawn.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleAllowItem.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleAllowRespawn.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleGamepadOnly.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Button\Config\ToggleTeamplay.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\Exit.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\ReloadButton.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Button\SwitchScreenButton.cs" />
@@ -130,6 +131,10 @@
     <Compile Include="Assets\Intern\Scripts\Screen\Game.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\Countdown.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\PlanetArrow.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Panel\PlayerIcon.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Panel\ScoreDisplayPlanet.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Panel\ScoreDisplayNumber.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Panel\ScoreDisplayType.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\ScoreEntry.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\ScorePanel.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Result.cs" />
@@ -141,6 +146,7 @@
     <Compile Include="Assets\Intern\Scripts\View\LeaderFollower.cs" />
     <Compile Include="Assets\Intern\Scripts\View\MergeQuad.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\RoundTimer.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Track.cs" />
     <Compile Include="Assets\Intern\Scripts\View\TrackCreator.cs" />
   </ItemGroup>

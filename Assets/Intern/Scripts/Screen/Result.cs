@@ -9,7 +9,7 @@ public class Result : Screen {
 	[SerializeField]
 	private ScorePanel score_panel;
 
-	private Dictionary<Player , int> score;
+	private ScoreSet[] score;
 
 	/// <summary>
 	/// Show score on enter
@@ -23,7 +23,7 @@ public class Result : Screen {
 	/// Bind player score to show
 	/// </summary>
 	/// <param name="score"></param>
-	public void BindScore( Dictionary<Player , int> score )
+	public void BindScore( ScoreSet[] score )
 	{
 		this.score = score;
 		score_panel.Show( score );

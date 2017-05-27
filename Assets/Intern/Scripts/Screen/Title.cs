@@ -65,7 +65,9 @@ public class Title : Screen {
 	/// <returns></returns>
 	public GameConfig SwitchConfig( string mode )
 	{
-		return allowed_config = current_config = Root.I.Get<GameModeManager>().AllowedConfig( mode );
+		allowed_config = Root.I.Get<GameModeManager>().AllowedConfig( mode );
+		current_config = allowed_config.Clone();
+		return allowed_config;
 	}
 
 	/// <summary>

@@ -8,14 +8,6 @@ using UnityEngine;
 /// </summary>
 public class Timescore : GameMode
 {
-	public override bool AllowRespawn
-	{
-		get
-		{
-			throw new NotImplementedException();
-		}
-	}
-
 	public override bool AllowCapture
 	{
 		get
@@ -35,35 +27,13 @@ public class Timescore : GameMode
 		}
 	}
 
+	/// <summary>
+	/// Get score by leader time
+	/// </summary>
+	/// <param name="player"></param>
+	/// <returns></returns>
 	public override int GetScore( Player player )
 	{
-		int result = 0;
-
-		foreach ( Planet planet in Root.I.Get<PlanetManager>().All )
-		{
-			if ( planet.Owner == player )
-			{
-				if ( player.Alive )
-				{
-					result++;
-				}
-				else
-				{
-					planet.Owner = null;
-				}
-			}
-		}
-
-		return result;
-	}
-
-	public override void ShowGameResult()
-	{
-		//Root.I.Get<ScreenManager>().Switch<Result>().BindScore( score );
-	}
-
-	public override void Update()
-	{
-		throw new NotImplementedException();
+		return Mathf.FloorToInt( player.LeaderTime );
 	}
 }

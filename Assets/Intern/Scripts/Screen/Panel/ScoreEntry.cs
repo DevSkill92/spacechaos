@@ -11,26 +11,43 @@ using UnityEngine.UI;
 public class ScoreEntry : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject score_item_prefab;
+	private GameObject player_prefab;
+	[SerializeField]
+	private Transform player_container;
 	[SerializeField]
 	private Transform score_container;
 	[SerializeField]
-	private Image player_color;
+	private Image player_type_icon;
+	[SerializeField]
+	private Sprite player_type_icon_single;
+	[SerializeField]
+	private Sprite player_type_icon_team;
+	[SerializeField]
+	private ScoreDisplayType[] score_type_handler;
 
-	public void Bind( Player player , int score )
+	public void Bind( ScoreSet score )
 	{
-		player_color.color = player.Color;
+		// set type icon sprite
+		player_type_icon.sprite = 1 < score.Player.Length ? player_type_icon_team : player_type_icon_single;
 
-		foreach( Transform child in score_container )
+		// Show players
+		foreach( Player player in score.Player )
 		{
-			DestroyImmediate( child.gameObject );
+			GameObject item = Instantiate( player_prefab );
+			item.transform.SetParent( player_container , false );
+			item.GetComponent<PlayerIcon>().Bind( player );
 		}
 
-		for( int i = 0 ; i < score ; i++ )
+
+		// Show score
+		foreach( ScoreDisplayType type in score_type_handler )
 		{
-			GameObject score_item = Instantiate( score_item_prefab );
-			score_item.transform.SetParent( score_container , true );
-			score_item.transform.localScale = Vector3.one;
+			if ( type.Type == score.DisplayType )
+			{
+				GameObject item = Instantiate( type.gameObject );
+				item.transform.SetParent( score_container , false );
+				( item.GetComponent( type.GetType() ) as ScoreDisplayType ).Bind( score );
+			}
 		}
 	}
 }

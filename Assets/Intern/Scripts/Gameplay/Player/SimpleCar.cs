@@ -120,7 +120,10 @@ public class SimpleCar : MonoBehaviour
 		rotation += steer = input_rotation * Time.deltaTime * max_steer * Mathf.Min( speed , 1 );
 		transform.rotation = Quaternion.Euler( new Vector3( 0 , rotation , 0 ) );
 
-		transform.position += transform.forward * speed * Time.deltaTime;
+		Vector3 next_position = transform.position + transform.forward * speed * Time.deltaTime;
+		next_position.y = 0; // force stay on the ground
+
+		transform.position = next_position;
 	}
 
 }

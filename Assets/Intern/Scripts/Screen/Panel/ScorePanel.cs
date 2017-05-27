@@ -26,7 +26,7 @@ public class ScorePanel : MonoBehaviour
 	/// Update the displayed content
 	/// </summary>
 	/// <param name="score"></param>
-	public void Show( Dictionary<Player,int> score )
+	public void Show( ScoreSet[] score )
 	{
 		gameObject.SetActive( true );
 
@@ -37,15 +37,12 @@ public class ScorePanel : MonoBehaviour
 		}
 
 		// create new entries
-		foreach( Player player in score.OrderBy( a => a.Value ).Select( a => a.Key ) )
+		foreach( ScoreSet entry_score in score.OrderByDescending( a => a.Score ) )
 		{
-			if ( 0 < score[ player ] )
-			{
-				GameObject entry = Instantiate( entry_prefab );
-				entry.transform.SetParent( entry_container , true );
-				entry.transform.localScale = Vector3.one;
-				entry.GetComponent<ScoreEntry>().Bind( player , score[ player ] );
-			}
+			GameObject entry = Instantiate( entry_prefab );
+			entry.transform.SetParent( entry_container , true );
+			entry.transform.localScale = Vector3.one;
+			entry.GetComponent<ScoreEntry>().Bind( entry_score );
 		}
 	}
 }

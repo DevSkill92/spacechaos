@@ -15,14 +15,19 @@ public abstract class ButtonHandler : MonoBehaviour
 	/// </summary>
 	private void Start()
 	{
+
+		EventTrigger.Entry entry = new EventTrigger.Entry();
+		entry.eventID = EventTriggerType.PointerClick;
+		entry.callback.AddListener( HandleClick );
+
 		EventTrigger trigger = GetComponent<EventTrigger>();
 		if ( null == trigger )
 		{
-			EventTrigger.Entry entry = new EventTrigger.Entry();
-			entry.eventID = EventTriggerType.PointerClick;
-			entry.callback.AddListener( HandleClick );
-
 			gameObject.AddComponent<EventTrigger>().triggers.Add( entry );
+		}
+		else
+		{
+			trigger.triggers.Add( entry );
 		}
 	}
 

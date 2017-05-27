@@ -9,7 +9,7 @@ using System.Linq;
 /// </summary>
 public class Game : Screen {
 	[ SerializeField]
-	private Transform score_panel;
+	private ScorePanel score_panel;
 	[SerializeField]
 	private Countdown countdown;
 	[SerializeField]
@@ -18,13 +18,13 @@ public class Game : Screen {
 	private Collider[] initial_leader_trigger;
 
 	private GameModeManager mode;
-	private float last_score_update;
+	private float last_mode_update;
 	private PlayerManager player;
 
 	/// <summary>
 	/// Getter for the scorepanel
 	/// </summary>
-	public Transform ScorePanel
+	public ScorePanel ScorePanel
 	{
 		get
 		{
@@ -88,9 +88,9 @@ public class Game : Screen {
 			Exit();
 		}
 
-		if ( Time.time - 1 > last_score_update )
+		if ( Time.time - 1 > last_mode_update )
 		{
-			last_score_update = Time.time;
+			last_mode_update = Time.time;
 			mode.Update();
 		}
 	}

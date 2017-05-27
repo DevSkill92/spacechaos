@@ -146,7 +146,7 @@ public class GameModeManager : IRootObject
 	/// </summary>
 	public void Update()
 	{
-		mode.Update();
+		Root.I.Get<ScreenManager>().Get<Game>().ScorePanel.Show( mode.Update() );
 	}
 
 	/// <summary>
@@ -154,6 +154,6 @@ public class GameModeManager : IRootObject
 	/// </summary>
 	public void ShowGameResult()
 	{
-		mode.ShowGameResult();
+		Root.I.Get<ScreenManager>().Switch<Result>().BindScore( mode.GetScore() );
 	}
 }

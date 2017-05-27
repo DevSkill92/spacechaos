@@ -63,34 +63,13 @@ public class Deathmatch : GameMode
 		}
 	}
 
+	/// <summary>
+	/// Get score by kills
+	/// </summary>
+	/// <param name="player"></param>
+	/// <returns></returns>
 	public override int GetScore( Player player )
 	{
-		int result = 0;
-
-		foreach ( Planet planet in Root.I.Get<PlanetManager>().All )
-		{
-			if ( planet.Owner == player )
-			{
-				if ( player.Alive )
-				{
-					result++;
-				}
-				else
-				{
-					planet.Owner = null;
-				}
-			}
-		}
-
-		return result;
-	}
-
-	public override void ShowGameResult()
-	{
-		//Root.I.Get<ScreenManager>().Switch<Result>().BindScore( score );
-	}
-
-	public override void Update()
-	{
+		return player.KillCount;
 	}
 }
