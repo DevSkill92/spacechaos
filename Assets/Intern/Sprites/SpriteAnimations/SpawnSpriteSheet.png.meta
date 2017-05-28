@@ -1,24 +1,19 @@
 fileFormatVersion: 2
-guid: 88076e855703d1f489a1b009c47ab6a9
-timeCreated: 1495983952
+guid: 54f153d5cf95e104a98bffd487e07df4
+timeCreated: 1495993063
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PlanetEinnahmeSpriteSheet_0
-    21300002: PlanetEinnahmeSpriteSheet_1
-    21300004: PlanetEinnahmeSpriteSheet_2
-    21300006: PlanetEinnahmeSpriteSheet_3
-    21300008: PlanetEinnahmeSpriteSheet_4
-    21300010: PlanetEinnahmeSpriteSheet_5
-    21300012: PlanetEinnahmeSpriteSheet_6
-    21300014: PlanetEinnahmeSpriteSheet_7
-    21300016: PlanetEinnahmeSpriteSheet_8
-    21300018: PlanetEinnahmeSpriteSheet_9
-    21300020: PlanetEinnahmeSpriteSheet_10
-    21300022: PlanetEinnahmeSpriteSheet_11
-    21300024: PlanetEinnahmeSpriteSheet_12
-    21300026: PlanetEinnahmeSpriteSheet_13
-    21300028: PlanetEinnahmeSpriteSheet_14
+    21300000: SpawnSpriteSheet_0
+    21300002: SpawnSpriteSheet_1
+    21300004: SpawnSpriteSheet_2
+    21300006: SpawnSpriteSheet_3
+    21300008: SpawnSpriteSheet_4
+    21300010: SpawnSpriteSheet_5
+    21300012: SpawnSpriteSheet_6
+    21300014: SpawnSpriteSheet_7
+    21300016: SpawnSpriteSheet_8
+    21300018: SpawnSpriteSheet_9
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -85,72 +80,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_1
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_2
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_4
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_5
+      name: SpawnSpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -163,7 +93,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_6
+      name: SpawnSpriteSheet_1
       rect:
         serializedVersion: 2
         x: 512
@@ -176,7 +106,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_7
+      name: SpawnSpriteSheet_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -189,7 +119,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_8
+      name: SpawnSpriteSheet_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -202,7 +132,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_9
+      name: SpawnSpriteSheet_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -215,7 +145,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_10
+      name: SpawnSpriteSheet_5
       rect:
         serializedVersion: 2
         x: 0
@@ -228,7 +158,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_11
+      name: SpawnSpriteSheet_6
       rect:
         serializedVersion: 2
         x: 512
@@ -241,7 +171,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_12
+      name: SpawnSpriteSheet_7
       rect:
         serializedVersion: 2
         x: 1024
@@ -254,7 +184,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_13
+      name: SpawnSpriteSheet_8
       rect:
         serializedVersion: 2
         x: 1536
@@ -267,7 +197,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_14
+      name: SpawnSpriteSheet_9
       rect:
         serializedVersion: 2
         x: 2048

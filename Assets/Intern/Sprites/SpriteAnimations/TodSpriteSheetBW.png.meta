@@ -1,24 +1,34 @@
 fileFormatVersion: 2
-guid: 88076e855703d1f489a1b009c47ab6a9
-timeCreated: 1495983952
+guid: cf1ae70f77e4e4f47b12e55beced4300
+timeCreated: 1495993287
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PlanetEinnahmeSpriteSheet_0
-    21300002: PlanetEinnahmeSpriteSheet_1
-    21300004: PlanetEinnahmeSpriteSheet_2
-    21300006: PlanetEinnahmeSpriteSheet_3
-    21300008: PlanetEinnahmeSpriteSheet_4
-    21300010: PlanetEinnahmeSpriteSheet_5
-    21300012: PlanetEinnahmeSpriteSheet_6
-    21300014: PlanetEinnahmeSpriteSheet_7
-    21300016: PlanetEinnahmeSpriteSheet_8
-    21300018: PlanetEinnahmeSpriteSheet_9
-    21300020: PlanetEinnahmeSpriteSheet_10
-    21300022: PlanetEinnahmeSpriteSheet_11
-    21300024: PlanetEinnahmeSpriteSheet_12
-    21300026: PlanetEinnahmeSpriteSheet_13
-    21300028: PlanetEinnahmeSpriteSheet_14
+    21300000: TodSpriteSheetBW_0
+    21300002: TodSpriteSheetBW_1
+    21300004: TodSpriteSheetBW_2
+    21300006: TodSpriteSheetBW_3
+    21300008: TodSpriteSheetBW_4
+    21300010: TodSpriteSheetBW_5
+    21300012: TodSpriteSheetBW_6
+    21300014: TodSpriteSheetBW_7
+    21300016: TodSpriteSheetBW_8
+    21300018: TodSpriteSheetBW_9
+    21300020: TodSpriteSheetBW_10
+    21300022: TodSpriteSheetBW_11
+    21300024: TodSpriteSheetBW_12
+    21300026: TodSpriteSheetBW_13
+    21300028: TodSpriteSheetBW_14
+    21300030: TodSpriteSheetBW_15
+    21300032: TodSpriteSheetBW_16
+    21300034: TodSpriteSheetBW_17
+    21300036: TodSpriteSheetBW_18
+    21300038: TodSpriteSheetBW_19
+    21300040: TodSpriteSheetBW_20
+    21300042: TodSpriteSheetBW_21
+    21300044: TodSpriteSheetBW_22
+    21300046: TodSpriteSheetBW_23
+    21300048: TodSpriteSheetBW_24
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -85,7 +95,137 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_0
+      name: TodSpriteSheetBW_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_7
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_9
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TodSpriteSheetBW_10
       rect:
         serializedVersion: 2
         x: 0
@@ -98,7 +238,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_1
+      name: TodSpriteSheetBW_11
       rect:
         serializedVersion: 2
         x: 512
@@ -111,7 +251,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_2
+      name: TodSpriteSheetBW_12
       rect:
         serializedVersion: 2
         x: 1024
@@ -124,7 +264,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_3
+      name: TodSpriteSheetBW_13
       rect:
         serializedVersion: 2
         x: 1536
@@ -137,7 +277,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_4
+      name: TodSpriteSheetBW_14
       rect:
         serializedVersion: 2
         x: 2048
@@ -150,7 +290,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_5
+      name: TodSpriteSheetBW_15
       rect:
         serializedVersion: 2
         x: 0
@@ -163,7 +303,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_6
+      name: TodSpriteSheetBW_16
       rect:
         serializedVersion: 2
         x: 512
@@ -176,7 +316,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_7
+      name: TodSpriteSheetBW_17
       rect:
         serializedVersion: 2
         x: 1024
@@ -189,7 +329,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_8
+      name: TodSpriteSheetBW_18
       rect:
         serializedVersion: 2
         x: 1536
@@ -202,7 +342,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_9
+      name: TodSpriteSheetBW_19
       rect:
         serializedVersion: 2
         x: 2048
@@ -215,7 +355,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_10
+      name: TodSpriteSheetBW_20
       rect:
         serializedVersion: 2
         x: 0
@@ -228,7 +368,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_11
+      name: TodSpriteSheetBW_21
       rect:
         serializedVersion: 2
         x: 512
@@ -241,7 +381,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_12
+      name: TodSpriteSheetBW_22
       rect:
         serializedVersion: 2
         x: 1024
@@ -254,7 +394,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_13
+      name: TodSpriteSheetBW_23
       rect:
         serializedVersion: 2
         x: 1536
@@ -267,7 +407,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlanetEinnahmeSpriteSheet_14
+      name: TodSpriteSheetBW_24
       rect:
         serializedVersion: 2
         x: 2048
