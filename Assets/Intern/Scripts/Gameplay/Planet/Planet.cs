@@ -17,6 +17,10 @@ public class Planet : MonoBehaviour
 	private float max_amount;
 	[SerializeField]
 	private float cooldown;
+
+	[SerializeField]
+	private GameObject capture_effect;
+
 	[SerializeField]
 	private UnityEvent on_captured = new UnityEvent();
 	public UnityEvent OnCaptured { get { return on_captured; } }
@@ -105,5 +109,7 @@ public class Planet : MonoBehaviour
 		this.owner = owner;
 		on_captured.Invoke();
 		last_capture = Time.time;
+
+		owner.ShowEffect( capture_effect , transform.position );
 	}
 }

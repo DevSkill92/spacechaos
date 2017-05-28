@@ -21,6 +21,10 @@ public class TrackCreator : RootGameComponent
 	private Material material;
 	[SerializeField]
 	private int fade = 6;
+	[SerializeField]
+	private int vertical_random_range = 20;
+	[SerializeField]
+	private Vector2 horizontal_random_range = new Vector2( 0.15f , 0.85f );
 
 	private List<Vector3> vertices = new List<Vector3>();
 	private List<int> indieces = new List<int>();
@@ -30,6 +34,14 @@ public class TrackCreator : RootGameComponent
 	private float last_update;
 	private int y_uv;
 	private float last_steer;
+
+	public int Length
+	{
+		get
+		{
+			return vertices.Count;
+		}
+	}
 
 	/// <summary>
 	/// Generates a new sement
@@ -209,10 +221,8 @@ public class TrackCreator : RootGameComponent
 	{
 		if ( length / 2 <= vertices.Count )
 		{
-			int index = vertices.Count - (int)Math.Round( (float)vertices.Count / 3 , 0 , MidpointRounding.ToEven );
-
-			Vector3 position = Vector3.Lerp( vertices[ index ] , vertices[ index + 1 ] , 0.5f );
-			Vector3 next = Vector3.Lerp( vertices[ index + 3 ] , vertices[ index + 4 ] , 0.5f );
+			Vector3 next;
+			Vector3 position = random_point( out next , new Vector2( vertical_random_range , vertices.Count - ( vertical_random_range + 2 ) ) );
 			float rotation = ( ( Mathf.Atan2( position.x - next.x , position.z - next.z ) / ( Mathf.PI * 2 ) ) * 360 ) + 180;
 
 			target.position = position;
@@ -221,5 +231,37 @@ public class TrackCreator : RootGameComponent
 		}
 
 		return false;
+	}
+
+	/// <summary>
+	/// Gets a randpom point on the track
+	/// </summary>
+	/// <param name="next"></param>
+	/// <returns></returns>
+	public Vector3 random_point(  out Vector3 next , Vector2 vertical_random_range )
+	{
+		next = Vector3.forward;
+
+		int index = (int)Math.Round( UnityEngine.Random.Range( vertical_random_range.x , vertical_random_range.y ) , 0 , MidpointRounding.ToEven );
+
+		if ( index  + 2 >= vertices.Count )
+		{
+			return Vector3.zero;
+		}
+
+		next = Vector3.Lerp( vertices[ index + 3 ] , vertices[ index + 4 ] , 0.5f );
+
+		return Vector3.Lerp( vertices[ index ] , vertices[ index + 1 ] , UnityEngine.Random.Range( horizontal_random_range.x , horizontal_random_range.y ) );
+	}
+
+	/// <summary>
+	/// Gets a randpom point on the track
+	/// </summary>
+	/// <param name="next"></param>
+	/// <returns></returns>
+	public Vector3 random_point( Vector2 vertical_random_range  )
+	{
+		Vector3 next;
+		return random_point( out next , vertical_random_range );
 	}
 }

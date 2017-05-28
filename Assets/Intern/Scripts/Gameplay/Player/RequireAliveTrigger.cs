@@ -16,6 +16,10 @@ public class RequireAliveTrigger : MonoBehaviour
 	private float force_alive_factor = 1;
 	[SerializeField]
 	private Player player;
+	[SerializeField]
+	private GameObject die_effect;
+	[SerializeField]
+	private GameObject spawn_effect;
 
 	[SerializeField]
 	private UnityEvent on_die = new UnityEvent();
@@ -105,6 +109,7 @@ public class RequireAliveTrigger : MonoBehaviour
 		fall_direction = new Vector3( fall_range , -20 , fall_range );
 		fall_rotation = transform.rotation.eulerAngles;
 		set_component_status( false );
+		player.ShowEffect( die_effect );
 	}
 
 	/// <summary>
@@ -163,6 +168,7 @@ public class RequireAliveTrigger : MonoBehaviour
 
 		set_component_status( true );
 		player.Follower();
+		player.ShowEffect( spawn_effect );
 	}
 
 	/// <summary>

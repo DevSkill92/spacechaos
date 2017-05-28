@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// Item for weapons
@@ -13,7 +14,7 @@ public class WeaponItem : Item
 	/// Override to attach instead of instantiate
 	/// </summary>
 	/// <param name="player"></param>
-	public override void Apply( Player player )
+	protected override void handle_apply( Player player )
 	{
 		player.AttachWeapon( weapon );
 	}

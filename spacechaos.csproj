@@ -140,6 +140,7 @@
     <Compile Include="Assets\Intern\Scripts\Screen\Result.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Title.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Billboard.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\PlayerColor.cs" />
     <Compile Include="Assets\Intern\Scripts\View\CaptureLine.cs" />
     <Compile Include="Assets\Intern\Scripts\View\CarRolling.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Intro.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Assets\Intern\Scripts\View\MergeQuad.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RoundTimer.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\Rotate.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Track.cs" />
     <Compile Include="Assets\Intern\Scripts\View\TrackCreator.cs" />
   </ItemGroup>

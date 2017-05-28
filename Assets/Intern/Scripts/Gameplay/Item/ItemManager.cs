@@ -13,8 +13,8 @@ public class ItemManager : RootGameComponent
 	private Vector2 chang_range;
 
 	private PlayerManager player_manager;
-	private Dictionary<Player , float> next_item = new Dictionary<Player , float>();
 	private bool allow_item;
+	private float next_item;
 
 	/// <summary>
 	/// Check enabled, store PlayerManager
@@ -25,9 +25,10 @@ public class ItemManager : RootGameComponent
 
 		player_manager = Root.I.Get<PlayerManager>();
 		allow_item = Root.I.Get<GameModeManager>().AllowItem;
-		next_item = new Dictionary<Player , float>();
 
 		gameObject.SetActive( allow_item );
+
+		next_item = Time.time + 5;
 	}
 
 	/// <summary>
@@ -35,31 +36,18 @@ public class ItemManager : RootGameComponent
 	/// </summary>
 	private void Update()
 	{
-		if ( !allow_item )
+		if (
+			!allow_item
+			|| Time.time < next_item
+		)
 		{
 			return;
 		}
 
-		foreach( Player player in player_manager.All )
-		{
-			if ( !next_item.ContainsKey( player ) )
-			{
-				next_item.Add( player , 0 );
-			}
+		TrackCreator track = Root.I.Get<TrackCreator>();
+		Instantiate( item_list[ Random.Range( 0 , item_list.Length ) ].gameObject )
+			.transform.position = Root.I.Get<TrackCreator>().random_point( new Vector2( track.Length - 10 , track.Length - 3 )  ) + Vector3.up;
 
-			if ( next_item[ player ] < Time.time )
-			{
-				give_item( player );
-				next_item[ player ] = Time.time + Random.Range( chang_range.x , chang_range.y );
-			}
-		}
-	}
-
-	/// <summary>
-	/// Give item to player
-	/// </summary>
-	private void give_item( Player player )
-	{
-		item_list[ Random.Range( 0 , item_list.Length ) ].Apply( player );
+		next_item = Time.time + Random.Range( chang_range.x , chang_range.y );
 	}
 }

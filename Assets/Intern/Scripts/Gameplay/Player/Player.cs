@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
 	private Color[] color;
 	[SerializeField]
 	private Transform weapon_container;
+	[SerializeField]
+	private GameObject leader_effect;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -213,6 +215,8 @@ public class Player : MonoBehaviour
 
 		is_leader = true;
 		last_leader_time_update = Time.time;
+
+		ShowEffect( leader_effect );
 	}
 
 	/// <summary>
@@ -224,7 +228,7 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.Disable();
 		alive_creator.enabled = false;
-		car.SetPower( 40 , 0 , 130 , enable_speedbreaker ? 200 : 0 );
+		car.SetPower( 40 , 0 , 150 , enable_speedbreaker ? 200 : 0 );
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
 		alive_trigger.gameObject.SetActive( false );
@@ -251,6 +255,14 @@ public class Player : MonoBehaviour
 		if ( null != bullet )
 		{
 			bullet.Receive( this );
+			return;
+		}
+
+		// Receive item
+		Item item = collider.GetComponent<Item>();
+		if ( null != item )
+		{
+			item.Apply( this );
 			return;
 		}
 
@@ -358,6 +370,56 @@ public class Player : MonoBehaviour
 		{
 			alive.Die();
 			opponent.kill_count++;
+		}
+	}
+	/// <summary>
+	/// Add effect prefab with player color
+	/// </summary>
+	/// <param name="prefab"></param>
+	public void ShowEffect( GameObject prefab )
+	{
+		ShowEffect( prefab , transform.position );
+	}
+
+	/// <summary>
+	/// Add effect prefab with player color
+	/// </summary>
+	/// <param name="prefab"></param>
+	public void ShowEffect( GameObject prefab , Vector3 position )
+	{
+		if ( null == prefab )
+		{
+			return;
+		}
+
+		GameObject container = Instantiate( prefab );
+		container.transform.position = position;
+
+		// set player color
+		MeshRenderer renderer = container.GetComponent<MeshRenderer>();
+		if ( null == renderer )
+		{
+			renderer = container.GetComponentInChildren<MeshRenderer>();
+		}
+		if ( null != renderer )
+		{
+			renderer.material.color = Color;
+		}
+
+		SpriteRenderer sprite = container.GetComponent<SpriteRenderer>();
+		if ( null == sprite )
+		{
+			sprite = container.GetComponentInChildren<SpriteRenderer>();
+		}
+		if ( null != sprite )
+		{
+			sprite.color = Color;
+		}
+
+		// add billboard
+		if ( null == container.GetComponent<Billboard>() )
+		{
+			container.AddComponent<Billboard>();
 		}
 	}
 }
