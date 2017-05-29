@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
 	private bool enabled;
 	private int index;
 	private int kill_count;
-	private float health;
 	private bool is_leader = false;
 	private float leader_time;
 	private float last_leader_time_update;
@@ -204,8 +203,9 @@ public class Player : MonoBehaviour
 	{
 		on_lead.Invoke();
 		body.material = skin_leader[ index ];
+		GameModeManager mode = Root.I.Get<GameModeManager>();
 
-		if ( !Root.I.Get<GameModeManager>().AITrack )
+		if ( !mode.AITrack )
 		{
 			track.Enable();
 		}
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
 		alive_creator.enabled = true;
 		leader_trigger.gameObject.SetActive( true );
 		alive_trigger.gameObject.SetActive( true );
-		car.SetPower( 37 , 15 , 95 , 0 );
+		car.SetPower( mode.AllowItem ? 36 : 37, 15 , 95 , 0 );
 
 		is_leader = true;
 		last_leader_time_update = Time.time;
@@ -309,6 +309,10 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Collect leader time
+	/// Handle shoot
+	/// </summary>
 	private void Update()
 	{
 		float time = Time.time;
@@ -339,6 +343,15 @@ public class Player : MonoBehaviour
 			last_leader_time_update = time;
 
 		}
+	}
+
+	/// <summary>
+	/// Give health to player
+	/// </summary>
+	/// <param name="health"></param>
+	public void GiveHealth( float health )
+	{
+		alive.GiveHealth( health );
 	}
 
 	/// <summary>
@@ -378,15 +391,10 @@ public class Player : MonoBehaviour
 	public void ReceiveDamage( float damage , Player opponent )
 	{
 		if ( 
-			!alive.Alive
-			|| this == opponent
+			alive.Alive
+			&& this != opponent
+			&& alive.ReceiveDamage( damage )
 		)
-		{
-			return;
-		}
-
-		health = Mathf.Max( 0 , health - damage );
-		if ( 0 >= health )
 		{
 			if ( is_leader )
 			{

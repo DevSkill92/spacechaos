@@ -54,7 +54,7 @@ public class ItemManager : RootGameComponent
 			Item item = null;
 			float max_prio = ( ( ( player_manager.All.Length + mode.ItemPriorityAdd ) - 2 ) * 0.17f ) + 0.25f;
 			if (
-				0 < max_prio
+				0.25f < max_prio
 				&& max_prio * 100 > Random.Range( 0 , 100 )
 			)
 			{

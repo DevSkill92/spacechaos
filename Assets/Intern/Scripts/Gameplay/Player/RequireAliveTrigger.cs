@@ -20,6 +20,8 @@ public class RequireAliveTrigger : MonoBehaviour
 	private GameObject die_effect;
 	[SerializeField]
 	private GameObject spawn_effect;
+	[SerializeField]
+	private float max_health = 10;
 
 	[SerializeField]
 	private UnityEvent on_die = new UnityEvent();
@@ -30,6 +32,7 @@ public class RequireAliveTrigger : MonoBehaviour
 
 	private bool alive = true;
 	private bool dead = false;
+	private float health;
 	private float last_alive;
 	private Vector3 fall_direction;
 	private Vector3 fall_rotation;
@@ -150,16 +153,20 @@ public class RequireAliveTrigger : MonoBehaviour
 	{
 		last_alive = Time.time + 1;
 		alive = true;
+		health = max_health;
 
 		if ( !player.Enabled )
 		{
 			return;
 		}
-		
-		Planet last_planet = Root.I.Get<PlanetManager>().LastPlayerPlanet( player );
-		if ( null != last_planet )
+
+		if ( !Root.I.Get<GameModeManager>().AllowItem )
 		{
-			last_planet.Owner = null;
+			Planet last_planet = Root.I.Get<PlanetManager>().LastPlayerPlanet( player );
+			if ( null != last_planet )
+			{
+				last_planet.Owner = null;
+			}
 		}
 
 		if ( !Root.I.Get<TrackCreator>().SetRespawnTransform( transform ) )
@@ -191,5 +198,34 @@ public class RequireAliveTrigger : MonoBehaviour
 		fall_rotation += fall_direction * 10 * Time.deltaTime;
 
 		transform.eulerAngles = fall_rotation;
+	}
+
+	/// <summary>
+	/// Receive damage from another player
+	/// </summary>
+	/// <returns>Kill</returns>
+	public bool ReceiveDamage( float damage )
+	{
+		if ( !Alive )
+		{
+			return false;
+		}
+
+		health = Mathf.Max( 0 , health - damage );
+		if ( 0 >= health )
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	/// <summary>
+	/// Give health to player
+	/// </summary>
+	/// <param name="health"></param>
+	public void GiveHealth( float health )
+	{
+		this.health = Mathf.Max( this.health + health , max_health );
 	}
 }
