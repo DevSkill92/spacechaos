@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
 		on_follow.Invoke();
 		track.Disable();
 		alive_creator.enabled = false;
-		car.SetPower( 40 , 0 , 150 , enable_speedbreaker ? 200 : 0 );
+		car.SetPower( 40 , -40 , 150 , enable_speedbreaker ? 200 : 0 );
 		alive.ForceAlive();
 		leader_trigger.gameObject.SetActive( false );
 		alive_trigger.gameObject.SetActive( false );

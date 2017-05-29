@@ -96,28 +96,45 @@ public class SimpleCar : MonoBehaviour
 	{
 		float input_acceleration = Input.GetAxis( "Vertical" + joy );
 		float input_rotation = Input.GetAxis( "Horizontal" + joy );
+		float abs_input_acceleration = Mathf.Abs( input_acceleration );
+
+		Debug.Log( input_acceleration );
 
 		// apply input
 		float current_acceleration = Time.deltaTime * ( 0 < input_acceleration ? acceleration : break_torque ) * input_acceleration;
-		if ( speed + current_acceleration < speed_max * input_acceleration )
+		if ( 
+			speed + current_acceleration < speed_max * abs_input_acceleration
+			&& speed + current_acceleration > speed_min * abs_input_acceleration
+		)
 		{
 			speed += current_acceleration;
 		}
-		
+
 		// damp speed
-		speed -= Time.deltaTime * damp * ( 1 - Mathf.Abs( input_acceleration ) );
+		float current_damp = Time.deltaTime * ( damp * ( speed > 0 ? 1 : -1 ) ) * ( 1 - Mathf.Abs( input_acceleration ) );
+		if ( Mathf.Abs( speed ) > Mathf.Abs( current_damp ) )
+		{
+			speed -= current_damp;
+		}
+		else
+		{
+			speed = 0;
+		}
 
 		float current_speed_max = speed_max;
+		float current_speed_min = speed_min;
 		if ( 0 < speed_breacker )
 		{
 			speed_breacker -= speed_breacker_damp * Time.deltaTime;
-			current_speed_max = ( 1 - ( ( speed_breacker / speed_breacker_max ) * speed_breacker_factor ) ) * speed_max;
+			float current_speed_breaker = ( 1 - ( ( speed_breacker / speed_breacker_max ) * speed_breacker_factor ) );
+			current_speed_max = current_speed_breaker * speed_max;
+			current_speed_min = current_speed_breaker * speed_min;
 		}
 
 		// cap speed
-		speed = Mathf.Max( speed_min , Mathf.Min( current_speed_max , speed ) );
+		speed = Mathf.Max( current_speed_min , Mathf.Min( current_speed_max , speed ) );
 
-		rotation += steer = input_rotation * Time.deltaTime * max_steer * Mathf.Min( speed , 1 );
+		rotation += steer = input_rotation * Time.deltaTime * max_steer * Mathf.Min( Mathf.Abs( speed ) , 1 );
 		transform.rotation = Quaternion.Euler( new Vector3( 0 , rotation , 0 ) );
 
 		Vector3 next_position = transform.position + transform.forward * speed * Time.deltaTime;
