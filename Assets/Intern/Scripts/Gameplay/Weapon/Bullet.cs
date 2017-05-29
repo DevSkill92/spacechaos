@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
 	private float timeout;
 	[SerializeField]
 	protected float damage;
+	[SerializeField]
+	private float fade = 0.3f;
 
 	[SerializeField]
 	private UnityEvent on_apply = new UnityEvent();
@@ -68,10 +70,17 @@ public class Bullet : MonoBehaviour
 	/// </summary>
 	private void Update()
 	{
+
 		if ( !applyed )
 		{
+			float expired = Time.time - start_date;
+			if ( timeout - fade < expired )
+			{
+				transform.localScale = Vector3.one * ( 1 - ( ( expired - ( timeout - fade ) ) / fade ) );
+			}
+
 			// Destroy after timeout
-			if ( start_date < Time.time - timeout )
+			if ( timeout < expired )
 			{
 				applyed = true;
 				Destroy( gameObject );

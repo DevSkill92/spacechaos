@@ -33,6 +33,15 @@ public class Deathmatch : GameMode
 		}
 	}
 
+	public override int ItemPriorityAdd
+	{
+		get
+		{
+			return 1;
+		}
+	}
+
+
 	/// <summary>
 	/// Limit round to 5min
 	/// </summary>

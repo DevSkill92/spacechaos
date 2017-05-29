@@ -104,6 +104,17 @@ public class GameModeManager : IRootObject
 	}
 
 	/// <summary>
+	/// Add factor for priority items
+	/// </summary>
+	public virtual int ItemPriorityAdd
+	{
+		get
+		{
+			return mode.ItemPriorityAdd;
+		}
+	}
+
+	/// <summary>
 	/// Binds the config
 	/// </summary>
 	/// <param name="name"></param>

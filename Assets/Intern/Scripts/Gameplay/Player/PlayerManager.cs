@@ -98,13 +98,45 @@ public class PlayerManager : RootGameComponent
 	/// Switch the leader to given player if possible
 	/// </summary>
 	/// <param name="player"></param>
-	public bool RequestLeaderSwitch( Player player )
+	public bool RequestLeaderSwitch( Player player=null )
 	{
-		if ( last_switch > Time.time - switch_cooldown )
+		if (
+			null != player
+			&& last_switch > Time.time - switch_cooldown 
+		)
 		{
 			return false;
 		}
-		last_switch = Time.time;
+
+		// switch to nearest other player
+		if ( null == player )
+		{
+			if ( null == leader )
+			{
+				return false;
+			}
+
+			float min_dst = float.MaxValue;
+			Vector3 leader_pos = leader.transform.position;
+			foreach( Player p in All )
+			{
+				if ( 
+					p == leader
+					|| !p.Alive
+				)
+				{
+					continue;
+				}
+
+				float dst = Vector3.Distance( p.transform.position , leader_pos );
+				if ( dst < min_dst )
+				{
+					min_dst = dst;
+					player = p;
+				}
+			}
+		}
+
 
 		// make sure that all players are follower
 		bool speed_breaker = null != leader;
@@ -112,11 +144,17 @@ public class PlayerManager : RootGameComponent
 		{
 			p.Follower( speed_breaker );
 		}
+		leader = null;
 
-		leader = player;
-		leader.Leader();
+		if ( null != player )
+		{
+			last_switch = Time.time;
 
-		on_switch_leader.Invoke();
+			leader = player;
+			leader.Leader();
+
+			on_switch_leader.Invoke();
+		}
 
 		return true;
 	}

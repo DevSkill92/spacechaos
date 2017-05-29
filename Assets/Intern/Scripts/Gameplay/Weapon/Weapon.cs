@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
 		if (
 			!Empty
 			&& last_shoot < Time.time - cooldown
-			&& handle_shoot()
+			&& handle_shoot( transform.position )
 		)
 		{
 			ammunition--;
@@ -72,14 +72,28 @@ public class Weapon : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Shoot the weapon
+	/// </summary>
+	public void ShootLeader( Vector3 start_position )
+	{
+		if (
+			last_shoot < Time.time - cooldown
+			&& handle_shoot( start_position )
+		)
+		{
+			last_shoot = Time.time;
+		}
+	}
+
+	/// <summary>
 	/// Handles the shooting logic
 	/// </summary>
 	/// <returns></returns>
-	protected virtual bool handle_shoot()
+	protected virtual bool handle_shoot( Vector3 start_position )
 	{
 		for( int i = 0 ; i < bullet_per_shot ; i++ )
 		{
-			create_bullet( bullet_prefab , shoot_direction( accuracy ) );
+			create_bullet( bullet_prefab , start_position , shoot_direction( accuracy ) );
 		}
 
 		return true;
@@ -89,11 +103,11 @@ public class Weapon : MonoBehaviour
 	/// Creates a bullet by given prefab
 	/// </summary>
 	/// <param name="prefab"></param>
-	protected void create_bullet( GameObject prefab , Vector3 direction )
+	protected void create_bullet( GameObject prefab , Vector3 position , Vector3 direction )
 	{
 		GameObject container = Instantiate( prefab );
 		Bullet bullet = container.GetComponent<Bullet>();
-		bullet.transform.position = transform.position;
+		bullet.transform.position = position;
 		bullet.Bind( owner , direction );
 
 		on_shoot.Invoke();

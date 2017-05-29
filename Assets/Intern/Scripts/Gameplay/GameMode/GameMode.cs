@@ -99,6 +99,17 @@ public abstract class GameMode
 	}
 
 	/// <summary>
+	/// Add factor for priority items
+	/// </summary>
+	public virtual int ItemPriorityAdd
+	{
+		get
+		{
+			return 0;
+		}
+	}
+
+	/// <summary>
 	/// Get the used score type for highscore
 	/// </summary>
 	protected virtual ScoreSet.Type ScoreType

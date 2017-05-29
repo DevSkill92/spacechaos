@@ -109,6 +109,8 @@ public class RequireAliveTrigger : MonoBehaviour
 		fall_direction = new Vector3( fall_range , -20 , fall_range );
 		fall_rotation = transform.rotation.eulerAngles;
 		set_component_status( false );
+
+		player.AttachWeapon();
 		player.ShowEffect( die_effect );
 	}
 
@@ -168,6 +170,15 @@ public class RequireAliveTrigger : MonoBehaviour
 
 		set_component_status( true );
 		player.Follower();
+
+		if  (
+			Root.I.Get<GameModeManager>().AllowLeader
+			&& null == Root.I.Get<PlayerManager>().Leader
+		)
+		{
+			Root.I.Get<PlayerManager>().RequestLeaderSwitch( player );
+		}
+
 		player.ShowEffect( spawn_effect );
 	}
 

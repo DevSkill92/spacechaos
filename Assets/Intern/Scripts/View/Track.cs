@@ -52,4 +52,14 @@ public class Track : MonoBehaviour
 			Root.I.Get<TrackCreator>().UpdateTrack( left_anchor , right_anchor , player.Color , car.Steer );
 		}
 	}
+
+	/// <summary>
+	/// Get a anchor point
+	/// </summary>
+	/// <param name="horizontal_position"></param>
+	/// <returns></returns>
+	public Vector3 Anchor( float horizontal_position )
+	{
+		return Vector3.Lerp( right_anchor.transform.position , left_anchor.transform.position , horizontal_position );
+	}
 }

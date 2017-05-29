@@ -22,7 +22,7 @@ public class TrackCreator : RootGameComponent
 	[SerializeField]
 	private int fade = 6;
 	[SerializeField]
-	private int vertical_random_range = 20;
+	private Vector2 vertical_random_range = new Vector2( 45 , 20 );
 	[SerializeField]
 	private Vector2 horizontal_random_range = new Vector2( 0.15f , 0.85f );
 
@@ -222,7 +222,7 @@ public class TrackCreator : RootGameComponent
 		if ( length / 2 <= vertices.Count )
 		{
 			Vector3 next;
-			Vector3 position = random_point( out next , new Vector2( vertical_random_range , vertices.Count - ( vertical_random_range + 2 ) ) );
+			Vector3 position = random_point( out next , new Vector2( vertical_random_range.x , vertices.Count - ( vertical_random_range.y + 2 ) ) );
 			float rotation = ( ( Mathf.Atan2( position.x - next.x , position.z - next.z ) / ( Mathf.PI * 2 ) ) * 360 ) + 180;
 
 			target.position = position;
@@ -244,7 +244,11 @@ public class TrackCreator : RootGameComponent
 
 		int index = (int)Math.Round( UnityEngine.Random.Range( vertical_random_range.x , vertical_random_range.y ) , 0 , MidpointRounding.ToEven );
 
-		if ( index  + 2 >= vertices.Count )
+		if (
+			0 >= index
+			|| 0 >= vertices.Count
+			|| index  + 2 >= vertices.Count
+		)
 		{
 			return Vector3.zero;
 		}

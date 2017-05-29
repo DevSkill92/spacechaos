@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 	private Transform weapon_container;
 	[SerializeField]
 	private GameObject leader_effect;
+	[SerializeField]
+	private Weapon leader_weapon;
 
 	[SerializeField]
 	private UnityEvent on_follow = new UnityEvent();
@@ -217,6 +219,7 @@ public class Player : MonoBehaviour
 		last_leader_time_update = Time.time;
 
 		ShowEffect( leader_effect );
+		AttachWeapon( leader_weapon );
 	}
 
 	/// <summary>
@@ -260,7 +263,10 @@ public class Player : MonoBehaviour
 
 		// Receive item
 		Item item = collider.GetComponent<Item>();
-		if ( null != item )
+		if ( 
+			null != item
+			&& !is_leader
+		)
 		{
 			item.Apply( this );
 			return;
@@ -314,7 +320,14 @@ public class Player : MonoBehaviour
 			&& enabled
 		)
 		{
-			weapon.Shoot();
+			if ( is_leader )
+			{
+				weapon.ShootLeader( track.Anchor( 0.2f + ( ( ( 1 + Input.GetAxis( "Horizontal" + joy ) ) / 2 ) * 0.6f ) ) );
+			}
+			else
+			{
+				weapon.Shoot();
+			}
 		}
 
 		if (
@@ -332,23 +345,30 @@ public class Player : MonoBehaviour
 	/// Attach the given weapon
 	/// </summary>
 	/// <param name="prefab"></param>
-	public void AttachWeapon( Weapon prefab )
+	public void AttachWeapon( Weapon prefab=null )
 	{
+		weapon = null;
+
 		foreach( Transform child in weapon_container )
 		{
 			Destroy( child.gameObject );
 		}
+		
+		if ( null == prefab )
+		{
+			return;
+		}
 
 		GameObject obj = Instantiate( prefab.gameObject );
-		Weapon weapon = obj.GetComponent<Weapon>();
-		weapon.Bind( this );
-		weapon.transform.SetParent( weapon_container , true );
-		weapon.transform.localPosition = Vector3.forward;
-		weapon.transform.rotation = Quaternion.LookRotation( transform.forward );
+		Weapon new_weapon = obj.GetComponent<Weapon>();
+		new_weapon.Bind( this );
+		new_weapon.transform.SetParent( weapon_container , true );
+		new_weapon.transform.localPosition = Vector3.forward;
+		new_weapon.transform.rotation = Quaternion.LookRotation( transform.forward );
 
 		on_attach_weapon.Invoke();
 
-		this.weapon = weapon;
+		weapon = new_weapon;
 	}
 
 	/// <summary>
@@ -368,6 +388,11 @@ public class Player : MonoBehaviour
 		health = Mathf.Max( 0 , health - damage );
 		if ( 0 >= health )
 		{
+			if ( is_leader )
+			{
+				Root.I.Get<PlayerManager>().RequestLeaderSwitch();
+			}
+
 			alive.Die();
 			opponent.kill_count++;
 		}
