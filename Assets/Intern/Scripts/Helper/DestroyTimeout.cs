@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Destroys the component after timeout
+/// </summary>
 public class DestroyTimeout : MonoBehaviour
 {
 	[SerializeField]
@@ -17,6 +20,19 @@ public class DestroyTimeout : MonoBehaviour
 		expired = Time.time + timeout;
 	}
 
+	/// <summary>
+	/// Start timer
+	/// </summary>
+	/// <param name="timeout"></param>
+	public void Bind( float timeout )
+	{
+		this.timeout = timeout;
+		expired = Time.time + timeout;
+	}
+
+	/// <summary>
+	/// Do check, destory
+	/// </summary>
 	private void Update()
 	{
 		if ( 

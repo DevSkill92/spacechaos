@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
 	public void ShootLeader( Vector3 start_position )
 	{
 		if (
-			last_shoot < Time.time - cooldown
+			last_shoot < Time.time - ( cooldown * ( 2f / Root.I.Get<PlayerManager>().All.Length ) )
 			&& handle_shoot( start_position )
 		)
 		{

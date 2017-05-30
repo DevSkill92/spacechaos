@@ -20,6 +20,7 @@ public class MusicMixer : MonoBehaviour
 		PlayerManager manager = Root.I.Get<PlayerManager>();
 		if ( null == manager )
 		{
+			transition( idle , capture );
 			return;
 		}
 

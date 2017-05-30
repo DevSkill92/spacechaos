@@ -130,6 +130,7 @@
     <Compile Include="Assets\Intern\Scripts\Screen\Button\ToggleButton.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Credits.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Game.cs" />
+    <Compile Include="Assets\Intern\Scripts\Screen\Panel\CapturePanel.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\Countdown.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\PlanetArrow.cs" />
     <Compile Include="Assets\Intern\Scripts\Screen\Panel\PlayerIcon.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Assets\Intern\Scripts\View\LeaderFollower.cs" />
     <Compile Include="Assets\Intern\Scripts\View\MergeQuad.cs" />
     <Compile Include="Assets\Intern\Scripts\View\PlayerColor.cs" />
+    <Compile Include="Assets\Intern\Scripts\View\PlaySound.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RandomInstance.cs" />
     <Compile Include="Assets\Intern\Scripts\View\Rotate.cs" />
     <Compile Include="Assets\Intern\Scripts\View\RoundTimer.cs" />

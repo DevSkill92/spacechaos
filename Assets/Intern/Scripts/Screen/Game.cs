@@ -11,11 +11,11 @@ public class Game : Screen {
 	[ SerializeField]
 	private ScorePanel score_panel;
 	[SerializeField]
+	private CapturePanel capture_panel;
+	[SerializeField]
 	private Countdown countdown;
 	[SerializeField]
 	private RoundTimer round_timer;
-	[SerializeField]
-	private Collider[] initial_leader_trigger;
 
 	private GameModeManager mode;
 	private float last_mode_update;
@@ -29,6 +29,17 @@ public class Game : Screen {
 		get
 		{
 			return score_panel;
+		}
+	}
+
+	/// <summary>
+	/// Getter for the capture panel
+	/// </summary>
+	public CapturePanel CapturePanel
+	{
+		get
+		{
+			return capture_panel;
 		}
 	}
 
@@ -55,12 +66,6 @@ public class Game : Screen {
 		foreach ( RootGameComponent component in FindObjectsOfType<RootGameComponent>() )
 		{
 			component.Enter();
-		}
-
-
-		foreach ( Collider trigger in initial_leader_trigger )
-		{
-			trigger.gameObject.SetActive( true );
 		}
 
 		mode = Root.I.Get<GameModeManager>();

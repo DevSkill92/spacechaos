@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 /// <summary>
 /// Creator for item effects
@@ -14,6 +15,10 @@ public abstract class Item : MonoBehaviour
 	private float lifetime = 4;
 	[SerializeField]
 	private float fade = 0.3f;
+
+	[SerializeField]
+	private UnityEvent on_apply = new UnityEvent();
+	public UnityEvent OnApply { get { return on_apply; } }
 
 	private float start;
 
@@ -66,6 +71,8 @@ public abstract class Item : MonoBehaviour
 		applyed = true;
 		handle_apply( player );
 		player.ShowEffect( item_effect );
+
+		on_apply.Invoke();
 
 		Destroy( gameObject );
 	}

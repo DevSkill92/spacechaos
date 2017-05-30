@@ -98,8 +98,6 @@ public class SimpleCar : MonoBehaviour
 		float input_rotation = Input.GetAxis( "Horizontal" + joy );
 		float abs_input_acceleration = Mathf.Abs( input_acceleration );
 
-		Debug.Log( input_acceleration );
-
 		// apply input
 		float current_acceleration = Time.deltaTime * ( 0 < input_acceleration ? acceleration : break_torque ) * input_acceleration;
 		if ( 

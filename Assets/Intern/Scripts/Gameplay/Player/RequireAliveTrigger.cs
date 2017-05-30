@@ -29,10 +29,13 @@ public class RequireAliveTrigger : MonoBehaviour
 	[ SerializeField]
 	private UnityEvent on_dead = new UnityEvent();
 	public UnityEvent OnDead { get { return on_dead; } }
+	[SerializeField]
+	private UnityEvent on_respawn = new UnityEvent();
+	public UnityEvent OnRespawn { get { return on_respawn; } }
 
 	private bool alive = true;
 	private bool dead = false;
-	private float health;
+	public float health;
 	private float last_alive;
 	private Vector3 fall_direction;
 	private Vector3 fall_rotation;
@@ -187,6 +190,7 @@ public class RequireAliveTrigger : MonoBehaviour
 		}
 
 		player.ShowEffect( spawn_effect );
+		on_respawn.Invoke();
 	}
 
 	/// <summary>

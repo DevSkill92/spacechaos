@@ -19,6 +19,8 @@ public class PlayerManager : RootGameComponent
 	private Transform ai_start;
 	[SerializeField]
 	private float switch_cooldown = 2;
+	[SerializeField]
+	private Collider[] initial_leader_trigger;
 
 	[SerializeField]
 	private UnityEvent on_switch_leader = new UnityEvent();
@@ -74,6 +76,25 @@ public class PlayerManager : RootGameComponent
 		player_list = new List<Player>();
 		ai.ResetCar( ai_start.transform.position );
 		ai.gameObject.SetActive( Root.I.Get<GameModeManager>().AITrack );
+
+		foreach ( Collider trigger in initial_leader_trigger )
+		{
+			trigger.gameObject.SetActive( true );
+		}
+	}
+
+	/// <summary>
+	/// Clear on leave
+	/// </summary>
+	public override void Leave()
+	{
+		base.Enter();
+
+		foreach( Player player in player_list )
+		{
+			Destroy( player.gameObject );
+		}
+		player_list = new List<Player>();
 	}
 
 	/// <summary>
@@ -152,6 +173,11 @@ public class PlayerManager : RootGameComponent
 
 			leader = player;
 			leader.Leader();
+
+			foreach ( Collider trigger in initial_leader_trigger )
+			{
+				trigger.gameObject.SetActive( false );
+			}
 
 			on_switch_leader.Invoke();
 		}

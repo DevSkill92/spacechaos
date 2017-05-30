@@ -94,6 +94,11 @@ public class Planet : MonoBehaviour
 		if ( player_progress[ player ] > max_amount )
 		{
 			capture_complete( player );
+			Root.I.Get<ScreenManager>().Get<Game>().CapturePanel.gameObject.SetActive( false );
+		}
+		else
+		{
+			Root.I.Get<ScreenManager>().Get<Game>().CapturePanel.Show( player.Color , player_progress[ player ] / max_amount );
 		}
 
 		return true;

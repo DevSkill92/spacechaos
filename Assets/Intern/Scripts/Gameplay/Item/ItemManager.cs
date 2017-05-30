@@ -52,9 +52,9 @@ public class ItemManager : RootGameComponent
 		if ( 0 != position.magnitude )
 		{
 			Item item = null;
-			float max_prio = ( ( ( player_manager.All.Length + mode.ItemPriorityAdd ) - 2 ) * 0.17f ) + 0.25f;
+			float max_prio = ( ( ( player_manager.All.Length + mode.ItemPriorityAdd ) - 2 ) * 0.17f );
 			if (
-				0.25f < max_prio
+				0 <= max_prio
 				&& max_prio * 100 > Random.Range( 0 , 100 )
 			)
 			{

@@ -8,6 +8,8 @@ public class Title : Screen {
 	[SerializeField]
 	private Transform game_config;
 	[SerializeField]
+	private Transform control;
+	[SerializeField]
 	private Transform start;
 
 	private bool online = true;
@@ -56,6 +58,7 @@ public class Title : Screen {
 		game_type.gameObject.SetActive( false );
 		game_config.gameObject.SetActive( false );
 		start.gameObject.SetActive( false );
+		control.gameObject.SetActive( false );
 	}
 
 	/// <summary>
@@ -68,6 +71,15 @@ public class Title : Screen {
 		allowed_config = Root.I.Get<GameModeManager>().AllowedConfig( mode );
 		current_config = allowed_config.Clone();
 		return allowed_config;
+	}
+
+	/// <summary>
+	/// Show controlls image
+	/// </summary>
+	public void ShowControl()
+	{
+		reset_state();
+		control.gameObject.SetActive( true );
 	}
 
 	/// <summary>

@@ -20,6 +20,10 @@ public class Bullet : MonoBehaviour
 	private UnityEvent on_apply = new UnityEvent();
 	public UnityEvent OnApply { get { return on_apply; } }
 
+	[SerializeField]
+	private UnityEvent on_create = new UnityEvent();
+	public UnityEvent OnCreate { get { return on_create; } }
+
 	private Player owner;
 	private bool applyed;
 	private float start_date;
@@ -34,6 +38,8 @@ public class Bullet : MonoBehaviour
 		transform.rotation = Quaternion.LookRotation( direction );
 		start_date = Time.time;
 		this.owner = owner;
+
+		on_create.Invoke();
 	}
 
 	/// <summary>
